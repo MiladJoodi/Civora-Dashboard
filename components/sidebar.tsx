@@ -167,7 +167,7 @@ export function Sidebar() {
       </div>
 
       {/* Menu Items */}
-      <nav className="flex-1 p-2 space-y-1 overflow-y-auto scrollbar-hide">
+      <nav className="flex-1 mt-8 p-2 space-y-1 overflow-y-auto scrollbar-hide">
         {menuItems.map((item) => {
           const Icon = item.icon
           const hasSubmenus = item.submenus.length > 0
