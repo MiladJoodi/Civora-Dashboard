@@ -1,0 +1,13 @@
+import RecentProjects from "./RecentProjects/RecentProjects";
+import InventoryStatus from "./InventoryStatus";
+
+const QuickActions = () => {
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <RecentProjects />
+            {/* <InventoryStatus /> */}
+        </div>
+    );
+}
+
+export default QuickActions;
