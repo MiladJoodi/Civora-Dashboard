@@ -43,7 +43,7 @@ export default function LastUpdate() {
     return (
         <div className="flex items-center gap-1 text-gray-600 bg-gray-100 px-1 py-1 rounded-lg text-sm w-max shadow-sm">
             <Bell className="w-4 h-4 text-blue-500" />
-            <span>آخرین بروزرسانی:</span>
+            <span className="hidden sm:block">آخرین بروزرسانی:</span>
 
             <span className="min-w-[2.5rem] text-blue-600">
                 {time ? time : (

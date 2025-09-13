@@ -13,7 +13,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, description, Icon, iconC
             {Icon && <Icon className={`w-7 h-7 text-gray-700 ${iconClassName}`} />}
             <div>
                 <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
-                {description && <p className="text-gray-600 mt-1">{description}</p>}
+                {description && <p className="text-gray-600 text-sm sm:text-base mt-1">{description}</p>}
             </div>
         </div>
     );

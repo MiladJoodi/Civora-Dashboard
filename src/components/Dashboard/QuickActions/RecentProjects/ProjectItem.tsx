@@ -1,7 +1,9 @@
 import { toPersianNumber } from "@/lib/ToPersianNumber";
 import { AnimatedProgressBar } from "./AnimatedProgressBar";
+import { ProjectInfo } from "./ProjectInfo";
 
 interface Project {
+  id:number;
   name: string;
   progress: number;
   status: string;
@@ -22,10 +24,8 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({ index, project }) => {
 
       <div className="flex-1">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 sm:p-3 bg-gray-50 rounded-lg gap-2 sm:gap-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
-            <p className="font-medium text-gray-900">{project.name}</p>
-            <p className="text-sm text-gray-600">{project.status}</p>
-          </div>
+
+          <ProjectInfo id={project.id} name={project.name} status={project.status} />
 
           <div className="w-full sm:w-40">
             <AnimatedProgressBar

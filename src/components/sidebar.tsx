@@ -13,7 +13,6 @@ import {
   Briefcase,
   Building,
   Bell,
-  ChevronLeft,
   ChevronDown,
   ChevronUp,
   User,
@@ -158,7 +157,7 @@ export function Sidebar() {
       <img 
         src="/logo.png" 
         alt="Civora Logo" 
-        className="h-4 w-auto" // ارتفاع مناسب و عرض اتوماتیک
+        className="h-4 w-auto"
       />
     </div>}
         <Button variant="ghost" size="sm" onClick={() => setCollapsed(!collapsed)} className="p-1 cursor-pointer">

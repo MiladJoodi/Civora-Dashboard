@@ -18,7 +18,10 @@ import {
   ChevronUp,
   User,
   PanelRightOpen,
+  X,
+  Menu,
 } from "lucide-react"
+import Link from "next/link"
 
 const menuItems = [
   { id: "home", label: "صفحه اصلی", icon: Home, route: "/", submenus: [] },
@@ -120,6 +123,7 @@ const menuItems = [
 ]
 
 export function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false) // For mobile menu toggle
   const [collapsed, setCollapsed] = useState(false)
   const [expandedMenus, setExpandedMenus] = useState<string[]>([])
   const router = useRouter()
@@ -148,95 +152,156 @@ export function Sidebar() {
   }
 
   return (
-    <div
-      style={{ backgroundColor: '#fefdf9' }}
-      className={`border-l border-gray-200 transition-all duration-300 ${collapsed ? "w-16" : "w-64"} flex flex-col`}
-    >
-      {/* Logo and Toggle */}
-      <div className="px-4 py-2 flex items-center justify-between">
-        {!collapsed && <div className="flex items-center">
-          <img
-            src="/logo.png"
-            alt="Civora Logo"
-            className="h-4 w-auto"
-          />
-        </div>}
-        <Button variant="ghost" size="sm" onClick={() => setCollapsed(!collapsed)} className="p-1 cursor-pointer">
-          <PanelRightOpen className={`!h-5 !w-5 text-gray-300 transition-transform ${collapsed ? "rotate-0" : "rotate-180"}`} />
-        </Button>
-      </div>
 
-      {/* Menu Items */}
-      <nav className="flex-1 mt-8 p-2 space-y-1 overflow-y-auto scrollbar-hide">
-        {menuItems.map((item) => {
-          const Icon = item.icon
-          const hasSubmenus = item.submenus.length > 0
-          const isExpanded = expandedMenus.includes(item.id)
-          const isMenuActive = isActive(item.route)
+    <>
+      {/* دکمه همبرگری برای موبایل */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="lg:hidden fixed top-3 right-4 z-50 cursor-pointer"
+        onClick={() => setIsOpen(true)}
+      >
+        <Menu className="h-6 w-6 text-gray-700" />
+      </Button>
 
-          return (
-            <div key={item.id} className="space-y-1">
-              <Button
-                variant="ghost"
-                className={`w-full justify-start rounded-none text-right h-10 cursor-pointer ${isMenuActive ? "bg-orange-100/50 text-[#da8439] hover:bg-orange-100" : "text-gray-700 hover:bg-gray-100"
-                  } ${collapsed ? "px-2" : "px-3"}`}
-                onClick={() => {
-                  if (hasSubmenus && !collapsed) {
-                    toggleSubmenu(item.id)
-                  } else {
-                    handleNavigation(item.route)
-                  }
-                }}
-              >
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center">
-                    <Icon className={`h-4 w-4 ${collapsed ? "" : "ml-3"}`} />
-                    {!collapsed && <span className="text-sm font-medium">{item.label}</span>}
-                  </div>
-                  {hasSubmenus && !collapsed && (
-                    <div className="mr-2">
-                      {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+      {/* بک‌درپ موبایل */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* سایدبار */}
+      <div
+        style={{ backgroundColor: "#fefdf9" }}
+        className={`
+          fixed top-0 right-0 z-50 h-full border-l border-gray-200
+          transform transition-all duration-300
+          ${isOpen ? "translate-x-0" : "translate-x-full"}
+          lg:translate-x-0 lg:static
+          ${collapsed ? "lg:w-16" : "lg:w-64"}
+          flex flex-col
+        `}
+      >
+        {/* دکمه بستن فقط روی موبایل */}
+        <div className="lg:hidden flex justify-end p-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsOpen(false)}
+          >
+            <X className="h-5 w-5 text-gray-600" />
+          </Button>
+        </div>
+
+
+
+
+        <div
+          style={{ backgroundColor: '#fefdf9' }}
+          className={`overflow-y-auto border-l border-gray-200 transition-all duration-300 ${collapsed ? "w-16" : "w-64"} flex flex-col justify-between h-full`}
+        >
+          {/* Logo and Toggle */}
+          <div className="px-4 py-2 flex items-center justify-between">
+            {!collapsed && <div className="flex items-center">
+      <Link href="/" className="flex items-center">
+        <img
+          src="/logo.png"
+          alt="Civora Logo"
+          className="h-4 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+        />
+      </Link>
+    </div>}
+            <Button variant="ghost" size="sm" onClick={() => setCollapsed(!collapsed)} className="p-1 cursor-pointer">
+              <PanelRightOpen className={`!h-5 !w-5 text-gray-300 transition-transform ${collapsed ? "rotate-0" : "rotate-180"}`} />
+            </Button>
+          </div>
+
+          {/* Menu Items */}
+          <nav className="flex-1 mt-8 p-2 space-y-1 overflow-y-auto scrollbar-hide">
+            {menuItems.map((item) => {
+              const Icon = item.icon
+              const hasSubmenus = item.submenus.length > 0
+              const isExpanded = expandedMenus.includes(item.id)
+              const isMenuActive = isActive(item.route)
+
+              return (
+                <div key={item.id} className="space-y-1">
+                  <Button
+                    variant="ghost"
+                    className={`w-full justify-start rounded-none text-right h-10 cursor-pointer ${isMenuActive ? "bg-orange-100/50 text-[#da8439] hover:bg-orange-100" : "text-gray-700 hover:bg-gray-100"
+                      } ${collapsed ? "px-2" : "px-3"}`}
+                    onClick={() => {
+                      if (hasSubmenus && !collapsed) {
+                        toggleSubmenu(item.id)
+                      } else {
+                        handleNavigation(item.route)
+                      }
+                    }}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <div className="flex items-center">
+                        <Icon className={`h-4 w-4 ${collapsed ? "" : "ml-3"}`} />
+                        {!collapsed && <span className="text-sm font-medium">{item.label}</span>}
+                      </div>
+                      {hasSubmenus && !collapsed && (
+                        <div className="mr-2">
+                          {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                        </div>
+                      )}
+                    </div>
+                  </Button>
+
+                  {hasSubmenus && isExpanded && !collapsed && (
+                    <div className="mr-4 space-y-1">
+                      {item.submenus.map((submenu) => (
+                        <Button
+                          key={submenu.id}
+                          variant="ghost"
+                          className={`w-full justify-start text-right h-8 text-xs cursor-pointer ${isActive(submenu.route)
+                            ? "text-[#da8439]"
+                            : "text-gray-600 hover:bg-gray-50"
+                            } px-6`}
+                          onClick={() => handleNavigation(submenu.route)}
+                        >
+                          <span>{submenu.label}</span>
+                        </Button>
+                      ))}
                     </div>
                   )}
                 </div>
-              </Button>
+              )
+            })}
+          </nav>
 
-              {hasSubmenus && isExpanded && !collapsed && (
-                <div className="mr-4 space-y-1">
-                  {item.submenus.map((submenu) => (
-                    <Button
-                      key={submenu.id}
-                      variant="ghost"
-                      className={`w-full justify-start text-right h-8 text-xs cursor-pointer ${isActive(submenu.route)
-                        ? "text-[#da8439]"
-                        : "text-gray-600 hover:bg-gray-50"
-                        } px-6`}
-                      onClick={() => handleNavigation(submenu.route)}
-                    >
-                      <span>{submenu.label}</span>
-                    </Button>
-                  ))}
+          {/* User Profile */}
+          {/* بخش کاربر همیشه پایین */}
+          <div className="p-4 border-t border-gray-200">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-orange-200 flex items-center justify-center text-sm font-bold text-orange-700">
+                ح
+              </div>
+              {!collapsed && (
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-gray-800">
+                    حمید علی‌محمدی
+                  </span>
+                  <span className="text-xs text-gray-500">مدیر پروژه</span>
                 </div>
               )}
             </div>
-          )
-        })}
-      </nav>
-
-      {/* User Profile */}
-      <div className="p-4 border-t border-gray-200">
-        <div className="flex items-center gap-2 space-x-3 space-x-reverse">
-          <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-            <User className="h-4 w-4 text-gray-600" />
           </div>
-          {!collapsed && (
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">حمید علی محمدی</p>
-              <p className="text-xs text-gray-500 truncate">johncornor@gmail.com</p>
-            </div>
-          )}
         </div>
+
+
       </div>
-    </div>
+
+
+
+
+    </>
+
+
   )
 }

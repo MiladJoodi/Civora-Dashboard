@@ -14,7 +14,7 @@ export function Header() {
           {/* <div className="font-bold text-xl text-gray-800">Civora</div> */}
 
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 space-x-reverse text-sm text-gray-600 font-semibold">
+          <nav className="flex items-center space-x-2 space-x-reverse text-sm text-gray-600 font-semibold mr-10 sm:mr-0">
             <span className="text-gray-400">دفتر فنی پروژه</span>
             <ChevronLeft className="h-4 w-4 rotate-180" />
             <span>درخواست خرید</span>

@@ -23,7 +23,7 @@ export const AnimatedProgressBar: React.FC<AnimatedProgressBarProps> = ({
 
   return (
     <div className={`text-right ${className}`}>
-      <p className="text-sm font-medium text-gray-900">
+      <p className="text-sm text-center font-medium text-gray-900">
         {toPersianNumber(currentProgress)}%
       </p>
 

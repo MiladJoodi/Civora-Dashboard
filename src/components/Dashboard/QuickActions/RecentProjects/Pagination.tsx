@@ -27,7 +27,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
 
       <button
         onClick={() => setCurrentPage(1)}
-        className="px-3 py-1 rounded-md text-xs bg-orange-100/50 text-orange-700 hover:bg-orange-100 transition cursor-pointer w-full sm:w-auto order-2 sm:order-2"
+        className="px-3 py-2 sm:py-1 rounded-md text-sm bg-orange-100/50 text-orange-700 hover:bg-orange-100 transition cursor-pointer w-full sm:w-auto order-2 sm:order-2"
       >
         مشاهده همه
       </button>
