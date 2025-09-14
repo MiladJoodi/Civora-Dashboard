@@ -40,12 +40,11 @@ import { toPersianNumber } from "@/lib/ToPersianNumber";
 import { ProjectHeaderSkeleton } from "./SingleProjectSkeleton";
 import NotFound from "./NotFound";
 
-interface SingleProjectProps {
-  projectId: number;
-}
 
-const SingleProject: React.FC<SingleProjectProps> = ({ projectId }) => {
+const SingleProject: React.FC = () => {
+  const params = useParams();
   const router = useRouter();
+  const id = Number(params.id);
 
   const [project, setProject] = useState<typeof recentProjects[0] | null>(null);
   const [message, setMessage] = useState("");
@@ -64,7 +63,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ projectId }) => {
 
 
   useEffect(() => {
-    const found = recentProjects.find((p) => p.id === projectId);
+    const found = recentProjects.find((p) => p.id === id);
     setProject(found || null);
 
     const timer = setTimeout(() => {
@@ -72,7 +71,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ projectId }) => {
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, [projectId]);
+  }, [id]);
 
   useEffect(() => {
     const handleScroll = () => {
