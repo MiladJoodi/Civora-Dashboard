@@ -1,10 +1,10 @@
 import SingleProject from "@/components/SingleProject/SingleProject";
 
-interface PageProps {
-  params: { id: string };
+interface PageParams {
+  id: string;
 }
 
-const Page = async ({ params }: PageProps) => {
+const Page = async ({ params }: { params: PageParams }) => {
   return <SingleProject projectId={Number(params.id)} />;
 };
 
