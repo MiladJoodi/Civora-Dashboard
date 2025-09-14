@@ -1,7 +1,7 @@
 import SingleProject from "@/components/SingleProject/SingleProject";
 
 interface PageParams {
-  id: string;
+  id: number;
 }
 
 const Page = async ({ params }: { params: PageParams }) => {
