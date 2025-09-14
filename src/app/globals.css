@@ -158,23 +158,3 @@
   display: none; /* Chrome, Safari, Edge */
 }
 /* scrollbar-hide */
-
-@keyframes waveMove {
-  0% {
-    transform: translateX(-60%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.wave-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(    90deg,    rgba(218, 132, 57, 0) 0%,    rgba(255, 190, 120, 0.9) 30%,    rgba(255, 255, 255, 0.8) 50%,    rgba(255, 190, 120, 0.9) 70%,    rgba(218, 132, 57, 0) 100%  );
-  animation: waveMove 2s linear infinite;
-  -webkit-animation: waveMove 2s linear infinite;
-}

@@ -4,6 +4,7 @@ import { Vazirmatn } from "next/font/google"
 import "./globals.css"
 import { Header } from "@/components/header"
 import { Sidebar } from "@/components/shared/Sidebar/Sidebar"
+import Footer from "@/components/shared/Footer/Footer"
 
 
 const vazirmatn = Vazirmatn({
@@ -34,6 +35,7 @@ export default function RootLayout({
             <Header />
             <main className="bg-white flex-1 overflow-y-auto px-6 py-6">
               {children}
+            <Footer />
             </main>
           </div>
         </div>

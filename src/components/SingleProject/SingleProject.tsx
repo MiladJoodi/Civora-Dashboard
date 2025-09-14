@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ProjectInfo } from "@/components/Dashboard/QuickActions/RecentProjects/ProjectInfo";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -36,13 +35,17 @@ import {
   Shield,
   Wifi
 } from "lucide-react";
-import { recentProjects } from "@/components/Dashboard/SingleProject/data";
+import { recentProjects } from "@/components/SingleProject/data";
 import { toPersianNumber } from "@/lib/ToPersianNumber";
+import { ProjectHeaderSkeleton } from "./SingleProjectSkeleton";
+import NotFound from "./NotFound";
 
-const SingleProject: React.FC = () => {
-  const params = useParams();
+interface SingleProjectProps {
+  projectId: number;
+}
+
+const SingleProject: React.FC<SingleProjectProps> = ({ projectId }) => {
   const router = useRouter();
-  const id = Number(params.id);
 
   const [project, setProject] = useState<typeof recentProjects[0] | null>(null);
   const [message, setMessage] = useState("");
@@ -54,22 +57,22 @@ const SingleProject: React.FC = () => {
   const [email, setEmail] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [loading, setLoading] = useState(true)
 
   const headerRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
 
+
   useEffect(() => {
-    const found = recentProjects.find((p) => p.id === id);
+    const found = recentProjects.find((p) => p.id === projectId);
     setProject(found || null);
 
     const timer = setTimeout(() => {
-      if (found) {
-        setProject(found);
-      }
-    }, 800);
+        setLoading(false) //
+    }, 3000);
 
     return () => clearTimeout(timer);
-  }, [id]);
+  }, [projectId]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -127,19 +130,13 @@ const SingleProject: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxOpen, closeLightbox, goToPrev, goToNext]);
 
+  if (loading) {
+  return <ProjectHeaderSkeleton />
+}
+
   if (!project) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen text-gray-500 bg-gradient-to-br from-slate-50 to-blue-50/30">
-        <div className="animate-pulse text-7xl mb-6">🏗️</div>
-        <p className="text-2xl font-light mb-6">پروژه یافت نشد</p>
-        <Button
-          className="rounded-full px-6 py-3 gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-          onClick={() => router.back()}
-        >
-          <ArrowLeft className="h-5 w-5" />
-          بازگشت به صفحه قبل
-        </Button>
-      </div>
+     <NotFound />
     );
   }
 
@@ -239,13 +236,13 @@ const SingleProject: React.FC = () => {
         {/* هدر پروژه */}
         <div
           ref={headerRef}
-          className="flex flex-col lg:flex-row gap-8 mb-16 animate-in slide-in-from-top duration-700"
+          className="flex flex-col lg:flex-row gap-8 mb-16"
         >
           <div className="flex-1">
             <div className="mb-8">
-              
-              
-              
+
+
+
 
               <h1 className="text-4xl md:text-5xl font-bold text-gray-800 flex items-center gap-3 mb-4">
                 <div className="p-2 bg-gradient-to-br from-orange-300 to-orange-700 rounded-xl text-white">
@@ -263,7 +260,7 @@ const SingleProject: React.FC = () => {
                 </button>
               </h1>
 
-<div className="flex flex-wrap items-center gap-3 mb-4 select-none">
+              <div className="flex flex-wrap items-center gap-3 mb-4 select-none">
                 <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm flex items-center gap-1">
                   <Award className="h-4 w-4" />
                   پروژه برتر
@@ -296,66 +293,66 @@ const SingleProject: React.FC = () => {
             </div>
 
             <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-  <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-    <Sparkles className="h-5 w-5 text-amber-500" />
-    خلاصه پروژه
-  </h3>
-  <p className="text-gray-600 leading-relaxed">
-    {project.name} با هدف ایجاد فضایی مدرن و کارآمد در حوزه ساختمان‌های مسکونی و تجاری طراحی شده است. این پروژه شامل مجموعه‌ای از امکانات پیشرفته، فضاهای سبز و طراحی مهندسی دقیق است که مطابق با استانداردهای روز دنیا پیاده‌سازی شده است.
-  </p>
-  
-  <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div className="flex items-start gap-2">
-      <div className="bg-gray-100 p-2 rounded-lg">
-        <MapPin className="h-5 w-5 text-gray-400" />
-      </div>
-      <div>
-        <h4 className="font-medium text-gray-800">موقعیت مکانی</h4>
-        <p className="text-sm text-gray-600">دسترسی عالی به مراکز تجاری و حمل و نقل عمومی</p>
-      </div>
-    </div>
-    
-    <div className="flex items-start gap-2">
-      <div className="bg-gray-100 p-2 rounded-lg">
-        <TreePine className="h-5 w-5 text-gray-400" />
-      </div>
-      <div>
-        <h4 className="font-medium text-gray-800">فضای سبز</h4>
-        <p className="text-sm text-gray-600">طراحی شده با ۴۰٪ فضای سبز و پارک‌های محلی</p>
-      </div>
-    </div>
-    
-    <div className="flex items-start gap-2">
-      <div className="bg-gray-100 p-2 rounded-lg">
-        <Shield className="h-5 w-5 text-gray-400" />
-      </div>
-      <div>
-        <h4 className="font-medium text-gray-800">امنیت</h4>
-        <p className="text-sm text-gray-600">سیستم نظارتی پیشرفته و کنترل تردد ۲۴ ساعته</p>
-      </div>
-    </div>
-    
-    <div className="flex items-start gap-2">
-      <div className="bg-gray-100 p-2 rounded-lg">
-        <Wifi className="h-5 w-5 text-gray-400" />
-      </div>
-      <div>
-        <h4 className="font-medium text-gray-800">امکانات هوشمند</h4>
-        <p className="text-sm text-gray-600">مجهز به سیستم خانه هوشمند و اینترنت پرسرعت</p>
-      </div>
-    </div>
-  </div>
-  
-  <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-    <h4 className="font-medium text-gray-800 mb-2">اهداف کلیدی پروژه:</h4>
-    <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
-      <li>ایجاد محیطی پایدار با مصرف بهینه انرژی</li>
-      <li>استفاده از مصالح ساختمانی با کیفیت و دوستدار محیط زیست</li>
-      <li>تأمین نیازهای ساکنین با طراحی کاربرمحور و انعطاف‌پذیر</li>
-      <li>ارائه خدمات رفاهی و تفریحی متنوع برای تمامی گروه‌های سنی</li>
-    </ul>
-  </div>
-</div>
+              <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-amber-500" />
+                خلاصه پروژه
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {project.name} با هدف ایجاد فضایی مدرن و کارآمد در حوزه ساختمان‌های مسکونی و تجاری طراحی شده است. این پروژه شامل مجموعه‌ای از امکانات پیشرفته، فضاهای سبز و طراحی مهندسی دقیق است که مطابق با استانداردهای روز دنیا پیاده‌سازی شده است.
+              </p>
+
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-start gap-2">
+                  <div className="bg-gray-100 p-2 rounded-lg">
+                    <MapPin className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800">موقعیت مکانی</h4>
+                    <p className="text-sm text-gray-600">دسترسی عالی به مراکز تجاری و حمل و نقل عمومی</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <div className="bg-gray-100 p-2 rounded-lg">
+                    <TreePine className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800">فضای سبز</h4>
+                    <p className="text-sm text-gray-600">طراحی شده با ۴۰٪ فضای سبز و پارک‌های محلی</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <div className="bg-gray-100 p-2 rounded-lg">
+                    <Shield className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800">امنیت</h4>
+                    <p className="text-sm text-gray-600">سیستم نظارتی پیشرفته و کنترل تردد ۲۴ ساعته</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <div className="bg-gray-100 p-2 rounded-lg">
+                    <Wifi className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800">امکانات هوشمند</h4>
+                    <p className="text-sm text-gray-600">مجهز به سیستم خانه هوشمند و اینترنت پرسرعت</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h4 className="font-medium text-gray-800 mb-2">اهداف کلیدی پروژه:</h4>
+                <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
+                  <li>ایجاد محیطی پایدار با مصرف بهینه انرژی</li>
+                  <li>استفاده از مصالح ساختمانی با کیفیت و دوستدار محیط زیست</li>
+                  <li>تأمین نیازهای ساکنین با طراحی کاربرمحور و انعطاف‌پذیر</li>
+                  <li>ارائه خدمات رفاهی و تفریحی متنوع برای تمامی گروه‌های سنی</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           <div className="lg:w-2/5">
@@ -383,38 +380,38 @@ const SingleProject: React.FC = () => {
 
               {/* آمار و ارقام پروژه */}
               <div className="grid grid-cols-2 gap-4 mt-18">
-  <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-blue-200 transition-all duration-300">
-    <div className="bg-blue-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-blue-100 transition-colors">
-      <BarChart3 className="h-6 w-6 text-blue-500" />
-    </div>
-    <div className="text-xl font-semibold text-gray-800">۲۴۰۰</div>
-    <div className="text-xs text-gray-400 mt-1">متر مربع</div>
-  </div>
-  
-  <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-green-200 transition-all duration-300">
-    <div className="bg-green-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-green-100 transition-colors">
-      <Clock className="h-6 w-6 text-green-500" />
-    </div>
-    <div className="text-xl font-semibold text-gray-800">۸۵٪</div>
-    <div className="text-xs text-gray-400 mt-1">پیشرفت</div>
-  </div>
-  
-  <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-purple-200 transition-all duration-300">
-    <div className="bg-purple-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-purple-100 transition-colors">
-      <Building2 className="h-6 w-6 text-purple-500" />
-    </div>
-    <div className="text-xl font-semibold text-gray-800">۱۸</div>
-    <div className="text-xs text-gray-400 mt-1">طبقه</div>
-  </div>
-  
-  <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-amber-200 transition-all duration-300">
-    <div className="bg-amber-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-amber-100 transition-colors">
-      <CheckCircle className="h-6 w-6 text-amber-500" />
-    </div>
-    <div className="text-xl font-semibold text-gray-800">۴۵</div>
-    <div className="text-xs text-gray-400 mt-1">واحد</div>
-  </div>
-</div>
+                <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-blue-200 transition-all duration-300">
+                  <div className="bg-blue-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-blue-100 transition-colors">
+                    <BarChart3 className="h-6 w-6 text-blue-500" />
+                  </div>
+                  <div className="text-xl font-semibold text-gray-800">۲۴۰۰</div>
+                  <div className="text-xs text-gray-400 mt-1">متر مربع</div>
+                </div>
+
+                <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-green-200 transition-all duration-300">
+                  <div className="bg-green-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-green-100 transition-colors">
+                    <Clock className="h-6 w-6 text-green-500" />
+                  </div>
+                  <div className="text-xl font-semibold text-gray-800">۸۵٪</div>
+                  <div className="text-xs text-gray-400 mt-1">پیشرفت</div>
+                </div>
+
+                <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-purple-200 transition-all duration-300">
+                  <div className="bg-purple-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-purple-100 transition-colors">
+                    <Building2 className="h-6 w-6 text-purple-500" />
+                  </div>
+                  <div className="text-xl font-semibold text-gray-800">۱۸</div>
+                  <div className="text-xs text-gray-400 mt-1">طبقه</div>
+                </div>
+
+                <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-amber-200 transition-all duration-300">
+                  <div className="bg-amber-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-amber-100 transition-colors">
+                    <CheckCircle className="h-6 w-6 text-amber-500" />
+                  </div>
+                  <div className="text-xl font-semibold text-gray-800">۴۵</div>
+                  <div className="text-xs text-gray-400 mt-1">واحد</div>
+                </div>
+              </div>
 
 
 
@@ -423,37 +420,36 @@ const SingleProject: React.FC = () => {
         </div>
 
         {/* تب های ناوبری */}
-        <div className="rounded-2xl shadow-sm border border-gray-100 p-2 mb-10 sticky top-20 z-30 backdrop-blur-sm bg-white/90">
-          <div className="flex flex-wrap gap-2">
+        <div className="rounded-2xl shadow-sm border border-gray-100 p-2 mb-10 sticky top-4 md:top-20 z-30 backdrop-blur-sm bg-white/90">
+          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
             <button
               onClick={() => setActiveTab("details")}
-              className={`px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer ${activeTab === "details"
-                ? "bg-orange-400 text-white shadow-md"
-                : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
+              className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer text-sm md:text-base ${activeTab === "details"
+                  ? "bg-orange-400 text-white shadow-md"
+                  : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
                 }`}
             >
-              <FileText className="h-5 w-5" />
+              <FileText className="h-4 w-4 md:h-5 md:w-5" />
               جزئیات
             </button>
             <button
               onClick={() => setActiveTab("gallery")}
-              className={`px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer ${activeTab === "gallery"
-                ? "bg-orange-400 text-white shadow-md"
-                : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
+              className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer text-sm md:text-base ${activeTab === "gallery"
+                  ? "bg-orange-400 text-white shadow-md"
+                  : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
                 }`}
             >
-              <Camera className="h-5 w-5" />
+              <Camera className="h-4 w-4 md:h-5 md:w-5" />
               گالری ({toPersianNumber(project.galleryImages.length)})
-              
             </button>
             <button
               onClick={() => setActiveTab("contact")}
-              className={`px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer ${activeTab === "contact"
-                ? "bg-orange-400 text-white shadow-md"
-                : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
+              className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer text-sm md:text-base ${activeTab === "contact"
+                  ? "bg-orange-400 text-white shadow-md"
+                  : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
                 }`}
             >
-              <MessageCircle className="h-5 w-5" />
+              <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
               تماس
             </button>
           </div>
@@ -550,9 +546,7 @@ const SingleProject: React.FC = () => {
                     { phase: "فاز چهارم: تکمیل و تحویل", progress: 30, date: "1403/04/11 - 1403/08/01" },
                   ].map((item, index) => (
                     <div key={index} className="flex gap-6">
-                      <div className="flex-shrink-0 w-9 h-9 rounded-full bg-blue-500 border-4 border-white shadow-md flex items-center justify-center z-10">
-                        <CheckCircle className="h-5 w-5 text-white" />
-                      </div>
+
                       <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 flex-1">
                         <div className="flex justify-between items-center mb-2">
                           <h4 className="font-medium text-gray-800">{item.phase}</h4>
@@ -619,7 +613,7 @@ const SingleProject: React.FC = () => {
           <div className="animate-in fade-in duration-500 mb-16">
             <div className="grid md:grid-cols-2 gap-8">
               {/* فرم تماس */}
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 min-w-0">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                   <div className="p-2 bg-blue-100 rounded-lg">
                     <MessageCircle className="text-blue-500 h-6 w-6" />
@@ -638,7 +632,7 @@ const SingleProject: React.FC = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
-                      className="rounded-xl py-3 px-4 transition-all focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="text-sm rounded-xl py-3 px-4 transition-all focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
 
@@ -653,7 +647,7 @@ const SingleProject: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="rounded-xl py-3 px-4 transition-all focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="text-sm rounded-xl py-3 px-4 transition-all focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
 
@@ -663,10 +657,10 @@ const SingleProject: React.FC = () => {
                     </label>
                     <Textarea
                       id="message"
-                      placeholder="متن پیام خود را اینجا تایپ کنید... (حداکثر 500 کاراکتر)"
+                      placeholder={`متن پیام خود را اینجا تایپ کنید... (حداکثر ${toPersianNumber(500)} کاراکتر)`}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="resize-none min-h-[140px] text-gray-700 rounded-xl border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                      className="text-sm resize-none min-h-[140px] text-gray-700 rounded-xl border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                       maxLength={500}
                       required
                     />
@@ -675,7 +669,7 @@ const SingleProject: React.FC = () => {
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-3">
                     <div className="text-sm text-gray-500 flex items-center gap-2">
                       <span className={message.length > 450 ? 'text-orange-500 font-medium' : ''}>
-                        {message.length}/500 کاراکتر
+                        {toPersianNumber(message.length)}/{toPersianNumber(500)} کاراکتر
                       </span>
                       {message.length > 450 && (
                         <span className="text-orange-500">نزدیک به حد مجاز!</span>
@@ -685,7 +679,7 @@ const SingleProject: React.FC = () => {
                     <Button
                       type="submit"
                       disabled={!message.trim() || !name.trim() || !email.trim() || isSending}
-                      className="rounded-xl px-7 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                      className="rounded-xl px-7 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer"
                     >
                       {isSending ? (
                         <>
@@ -741,7 +735,7 @@ const SingleProject: React.FC = () => {
                 <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl text-white shadow-lg">
                   <h3 className="text-xl font-bold mb-3">نیاز به مشاوره تخصصی دارید؟</h3>
                   <p className="mb-5 opacity-90">کارشناسان ما آماده پاسخگویی به سوالات شما درباره این پروژه هستند.</p>
-                  <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 rounded-xl py-3 font-medium flex items-center justify-center gap-2">
+                  <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 rounded-xl py-3 font-medium flex items-center justify-center gap-2 cursor-pointer">
                     <Phone className="h-5 w-5" />
                     درخواست مشاوره رایگان
                   </Button>
@@ -784,59 +778,7 @@ const SingleProject: React.FC = () => {
         </div>
       </div>
 
-      {/* فوتر */}
-      {/* <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-10">
-        <div className="container max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h4 className="text-lg font-semibold mb-4">درباره ما</h4>
-              <p className="text-gray-400 text-sm">ما با بیش از ۱۵ سال تجربه در زمینه ساخت و ساز، پروژه های متعددی را با بالاترین استانداردها به پایان رسانده ایم.</p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">لینک های سریع</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">پروژه ها</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">خدمات</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">درباره ما</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">تماس با ما</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">تماس با ما</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  <span>۰۲۱-۸۸۷۶۵۴۳۲</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  <span>info@example.com</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
-                  <span>تهران، شهرک غرب</span>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">خبرنامه</h4>
-              <p className="text-gray-400 text-sm mb-3">برای دریافت最新ترین پروژه ها و اخبار در خبرنامه ما عضو شوید.</p>
-              <div className="flex">
-                <Input
-                  placeholder="ایمیل خود را وارد کنید"
-                  className="rounded-l-none rounded-r-xl bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                />
-                <Button className="rounded-l-xl rounded-r-none bg-blue-500 hover:bg-blue-600">
-                  ارسال
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
-            <p>© ۱۴۰۲ کلیه حقوق این سایت محفوظ است.</p>
-          </div>
-        </div>
-      </footer> */}
+
     </div>
   );
 };

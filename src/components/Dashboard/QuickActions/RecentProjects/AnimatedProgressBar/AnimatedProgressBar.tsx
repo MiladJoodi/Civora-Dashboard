@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { toPersianNumber } from "@/lib/ToPersianNumber"
+import "./AnimatedProgressBar.css"
 
 interface AnimatedProgressBarProps {
   progress: number

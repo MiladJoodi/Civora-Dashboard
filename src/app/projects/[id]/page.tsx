@@ -1,9 +1,7 @@
-import SingleProject from "@/components/Dashboard/SingleProject/SingleProject";
+import SingleProject from "@/components/SingleProject/SingleProject";
 
-const page = () => {
-  return (
-    <SingleProject />
-  );
-}
+const Page = ({ params }: { params: { id: string } }) => {
+  return <SingleProject projectId={Number(params.id)} />;
+};
 
-export default page;
+export default Page;

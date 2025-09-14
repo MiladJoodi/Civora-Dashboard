@@ -1,5 +1,5 @@
 import { toPersianNumber } from "@/lib/ToPersianNumber";
-import { AnimatedProgressBar } from "./AnimatedProgressBar";
+import { AnimatedProgressBar } from "./AnimatedProgressBar/AnimatedProgressBar";
 import { ProjectInfo } from "./ProjectInfo";
 
 interface Project {
