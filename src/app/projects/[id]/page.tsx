@@ -1,13 +1,9 @@
+// app/projects/[id]/page.tsx
 import SingleProject from "@/components/SingleProject/SingleProject";
 
-interface PageProps {
-  params: { id: string };
-}
-
-const Page = async ({ params }: PageProps) => {
-  const id = Number(params.id);
-
-  return <SingleProject id={id} />;
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  return <SingleProject id={Number(id)} />;
 };
 
 export default Page;
