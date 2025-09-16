@@ -9,7 +9,7 @@ import QuickActions from "./QuickActions/QuickActions"
 export default function Dashboard() {
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 container mx-auto">
             <Header />
             <StatsGrid stats={stats} />
             <QuickActions />

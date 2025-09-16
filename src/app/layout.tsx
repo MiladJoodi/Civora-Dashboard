@@ -33,7 +33,7 @@ export default function RootLayout({
           {/* بخش اصلی سمت چپ */}
           <div className="flex-1 flex flex-col overflow-hidden">
             <Header />
-            <main className="bg-white flex-1 overflow-y-auto px-6 py-6">
+            <main className="bg-white flex-1 overflow-y-auto px-3 py-3">
               {children}
             <Footer />
             </main>
