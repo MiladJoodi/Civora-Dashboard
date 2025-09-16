@@ -183,7 +183,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
         {/* دکمه بازگشت */}
         <Button
           variant="ghost"
-          className="mb-8 flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-all duration-300 rounded-full px-3 py-2 md:px-4 hover:bg-blue-50/50 backdrop-blur-sm cursor-pointer mr-auto"
+          className="mb-8 flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-all duration-300 rounded-full px-2.5 py-1.5 md:px-4 hover:bg-blue-50/50 backdrop-blur-sm cursor-pointer mr-auto"
           onClick={() => router.back()}
         >
           بازگشت
@@ -201,14 +201,14 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
 
 
 
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+              <h1 className="text-3xl md:text-5xl font-bold text-gray-800 flex items-center gap-3 mb-4">
                 <div className="p-2 bg-gradient-to-br from-orange-300 to-orange-700 rounded-xl text-white">
                   <Building2 className="h-8 w-8" />
                 </div>
                 {project.name}
                 <button
                   onClick={() => setIsFavorite(!isFavorite)}
-                  className="p-2 text-amber-400 hover:text-amber-500 transition-colors cursor-pointer"
+                  className="p-1.5 md:p-2 text-amber-400 hover:text-amber-500 transition-colors cursor-pointer"
                 >
                   <Star
                     className="h-7 w-7"
@@ -217,44 +217,44 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                 </button>
               </h1>
 
-              <div className="flex flex-wrap items-center gap-3 mb-4 select-none">
-                <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm flex items-center gap-1">
+              <div className="flex flex-wrap items-center gap-2.5 md:gap-3 mb-4 select-none">
+                <span className="px-2.5 py-1 bg-blue-100 text-blue-600 rounded-full text-xs md:text-sm flex items-center gap-1">
                   <Award className="h-4 w-4" />
                   پروژه برتر
                 </span>
-                <span className="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm flex items-center gap-1">
+                <span className="px-2.5 py-1 bg-green-100 text-green-600 rounded-full text-xs md:text-sm flex items-center gap-1">
                   <CheckCircle className="h-4 w-4" />
                   تضمین کیفیت
                 </span>
               </div>
 
 
-              <p className="text-gray-600 max-w-3xl leading-relaxed">
+              <p className="text-gray-600 max-w-3xl leading-relaxed text-sm md:text-base">
                 <span className="font-semibold text-blue-500">{project.name}</span> یک طرح مدرن و پیشرفته در حوزه ساخت‌وساز با استانداردهای بین‌المللی و طراحی منحصر به فرد است.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow-sm border border-gray-100">
+            <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-8">
+              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl shadow-sm border border-gray-100">
                 <Calendar className="h-5 w-5 text-orange-300" />
-                <span className="text-gray-700">شروع: <span className="font-medium">شهریور {toPersianNumber(1402)}</span></span>
+                <span className="text-gray-700 text-sm md:text-base">شروع: <span className="font-medium">شهریور {toPersianNumber(1402)}</span></span>
               </div>
-              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl shadow-sm border border-gray-100">
                 <MapPin className="h-5 w-5 text-orange-300" />
-                <span className="text-gray-700">تهران، شهرک غرب</span>
+                <span className="text-gray-700 text-sm md:text-base">تهران، شهرک غرب</span>
               </div>
-              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl shadow-sm border border-gray-100">
                 <Users className="h-5 w-5 text-orange-300" />
-                <span className="text-gray-700">تیم: <span className="font-medium">۵ نفر</span></span>
+                <span className="text-gray-700 text-sm md:text-base">تیم: <span className="font-medium">۵ نفر</span></span>
               </div>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+            <div className="bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-gray-100">
+              <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2 text-base md:text-lg">
                 <Sparkles className="h-5 w-5 text-amber-500" />
                 خلاصه پروژه
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed text-sm md:text-base">
                 {project.name} با هدف ایجاد فضایی مدرن و کارآمد در حوزه ساختمان‌های مسکونی و تجاری طراحی شده است. این پروژه شامل مجموعه‌ای از امکانات پیشرفته، فضاهای سبز و طراحی مهندسی دقیق است که مطابق با استانداردهای روز دنیا پیاده‌سازی شده است.
               </p>
 
@@ -264,8 +264,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                     <MapPin className="h-5 w-5 text-gray-400" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-800">موقعیت مکانی</h4>
-                    <p className="text-sm text-gray-600">دسترسی عالی به مراکز تجاری و حمل و نقل عمومی</p>
+                    <h4 className="font-medium text-gray-800 text-sm md:text-base">موقعیت مکانی</h4>
+                    <p className="text-xs md:text-sm text-gray-600">دسترسی عالی به مراکز تجاری و حمل و نقل عمومی</p>
                   </div>
                 </div>
 
@@ -274,8 +274,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                     <TreePine className="h-5 w-5 text-gray-400" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-800">فضای سبز</h4>
-                    <p className="text-sm text-gray-600">طراحی شده با ۴۰٪ فضای سبز و پارک‌های محلی</p>
+                    <h4 className="font-medium text-gray-800 text-sm md:text-base">فضای سبز</h4>
+                    <p className="text-xs md:text-sm text-gray-600">طراحی شده با ۴۰٪ فضای سبز و پارک‌های محلی</p>
                   </div>
                 </div>
 
@@ -284,8 +284,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                     <Shield className="h-5 w-5 text-gray-400" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-800">امنیت</h4>
-                    <p className="text-sm text-gray-600">سیستم نظارتی پیشرفته و کنترل تردد ۲۴ ساعته</p>
+                    <h4 className="font-medium text-gray-800 text-sm md:text-base">امنیت</h4>
+                    <p className="text-xs md:text-sm text-gray-600">سیستم نظارتی پیشرفته و کنترل تردد ۲۴ ساعته</p>
                   </div>
                 </div>
 
@@ -294,8 +294,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                     <Wifi className="h-5 w-5 text-gray-400" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-800">امکانات هوشمند</h4>
-                    <p className="text-sm text-gray-600">مجهز به سیستم خانه هوشمند و اینترنت پرسرعت</p>
+                    <h4 className="font-medium text-gray-800 text-sm md:text-base">امکانات هوشمند</h4>
+                    <p className="text-xs md:text-sm text-gray-600">مجهز به سیستم خانه هوشمند و اینترنت پرسرعت</p>
                   </div>
                 </div>
               </div>
@@ -319,7 +319,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                 <img
                   src={project.mainImage}
                   alt={project.name}
-                  className="w-full h-56 sm:h-72 md:h-80 object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-44 sm:h-60 md:h-80 object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
                 <button
                   onClick={() => openLightbox(0)}
@@ -336,36 +336,36 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
 
 
               {/* آمار و ارقام پروژه */}
-              <div className="grid grid-cols-2 gap-4 mt-18">
-                <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-blue-200 transition-all duration-300">
+              <div className="grid grid-cols-2 gap-3 md:gap-4 mt-18">
+                <div className="bg-white p-3 rounded-xl border border-gray-100 text-center group hover:border-blue-200 transition-all duration-300">
                   <div className="bg-blue-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-blue-100 transition-colors">
                     <BarChart3 className="h-6 w-6 text-blue-500" />
                   </div>
-                  <div className="text-xl font-semibold text-gray-800">۲۴۰۰</div>
+                  <div className="text-lg md:text-xl font-semibold text-gray-800">۲۴۰۰</div>
                   <div className="text-xs text-gray-400 mt-1">متر مربع</div>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-green-200 transition-all duration-300">
+                <div className="bg-white p-3 rounded-xl border border-gray-100 text-center group hover:border-green-200 transition-all duration-300">
                   <div className="bg-green-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-green-100 transition-colors">
                     <Clock className="h-6 w-6 text-green-500" />
                   </div>
-                  <div className="text-xl font-semibold text-gray-800">۸۵٪</div>
+                  <div className="text-lg md:text-xl font-semibold text-gray-800">۸۵٪</div>
                   <div className="text-xs text-gray-400 mt-1">پیشرفت</div>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-purple-200 transition-all duration-300">
+                <div className="bg-white p-3 rounded-xl border border-gray-100 text-center group hover:border-purple-200 transition-all duration-300">
                   <div className="bg-purple-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-purple-100 transition-colors">
                     <Building2 className="h-6 w-6 text-purple-500" />
                   </div>
-                  <div className="text-xl font-semibold text-gray-800">۱۸</div>
+                  <div className="text-lg md:text-xl font-semibold text-gray-800">۱۸</div>
                   <div className="text-xs text-gray-400 mt-1">طبقه</div>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl border border-gray-100 text-center group hover:border-amber-200 transition-all duration-300">
+                <div className="bg-white p-3 rounded-xl border border-gray-100 text-center group hover:border-amber-200 transition-all duration-300">
                   <div className="bg-amber-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-amber-100 transition-colors">
                     <CheckCircle className="h-6 w-6 text-amber-500" />
                   </div>
-                  <div className="text-xl font-semibold text-gray-800">۴۵</div>
+                  <div className="text-lg md:text-xl font-semibold text-gray-800">۴۵</div>
                   <div className="text-xs text-gray-400 mt-1">واحد</div>
                 </div>
               </div>
@@ -418,69 +418,69 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
             ref={detailsRef}
             className="animate-in fade-in duration-500 mb-16"
           >
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-8">
-              <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 mb-8">
+              <h2 className="text-lg md:text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                 <div className="p-2 bg-blue-100 rounded-lg">
                   <FileText className="text-blue-500 h-6 w-6" />
                 </div>
                 توضیحات کامل پروژه
               </h2>
 
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                 <div>
-                  <h3 className="text-base md:text-lg font-semibold text-gray-700 mb-4 pb-2 border-b border-gray-200">ویژگی‌های پروژه</h3>
-                  <ul className="space-y-4">
-                    <li className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
+                  <h3 className="text-sm md:text-lg font-semibold text-gray-700 mb-3 md:mb-4 pb-2 border-b border-gray-200">ویژگی‌های پروژه</h3>
+                  <ul className="space-y-3 md:space-y-4">
+                    <li className="flex items-center gap-4 p-3 md:p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
                       <div className="p-2 bg-orange-100 rounded-lg mt-0.5">
                         <span className="text-orange-500 font-medium">۱</span>
                       </div>
-                      <span className="text-gray-700">طراحی داخلی مدرن و لوکس با متریال درجه یک</span>
+                      <span className="text-gray-700 text-sm md:text-base">طراحی داخلی مدرن و لوکس با متریال درجه یک</span>
                     </li>
-                    <li className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
+                    <li className="flex items-center gap-4 p-3 md:p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
                       <div className="p-2 bg-orange-100 rounded-lg mt-0.5">
                         <span className="text-orange-500 font-medium">۲</span>
                       </div>
-                      <span className="text-gray-700">سیستم هوشمند مدیریت ساختمان (BMS)</span>
+                      <span className="text-gray-700 text-sm md:text-base">سیستم هوشمند مدیریت ساختمان (BMS)</span>
                     </li>
-                    <li className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
+                    <li className="flex items-center gap-4 p-3 md:p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
                       <div className="p-2 bg-orange-100 rounded-lg mt-0.5">
                         <span className="text-orange-500 font-medium">۳</span>
                       </div>
-                      <span className="text-gray-700">آسانسورهای پرسرعت و های-تک</span>
+                      <span className="text-gray-700 text-sm md:text-base">آسانسورهای پرسرعت و های-تک</span>
                     </li>
-                    <li className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
+                    <li className="flex items-center gap-4 p-3 md:p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
                       <div className="p-2 bg-orange-100 rounded-lg mt-0.5">
                         <span className="text-orange-500 font-medium">۴</span>
                       </div>
-                      <span className="text-gray-700">امکانات رفاهی کامل (سالن ورزشی، استخر، لابی مجلل)</span>
+                      <span className="text-gray-700 text-sm md:text-base">امکانات رفاهی کامل (سالن ورزشی، استخر، لابی مجلل)</span>
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-base md:text-lg font-semibold text-gray-700 mb-4 pb-2 border-b border-gray-200">جزئیات فنی</h3>
-                  <p className="text-gray-600 leading-relaxed text-justify mb-6">
+                  <h3 className="text-sm md:text-lg font-semibold text-gray-700 mb-3 md:mb-4 pb-2 border-b border-gray-200">جزئیات فنی</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm md:text-base text-justify mb-5 md:mb-6">
                     این پروژه با رویکردی کاملاً حرفه‌ای و مطابق با آخرین استانداردهای معماری طراحی شده است.
                     تمامی بخش‌ها از طراحی داخلی گرفته تا سازه و محوطه‌سازی، با دقت و هماهنگی انجام شده‌اند.
                     امکانات رفاهی شامل فضای ورزشی، سالن اجتماعات، پارکینگ اختصاصی و فضاهای سبز مدرن است.
                   </p>
 
-                  <div className="bg-orange-50 p-5 rounded-2xl border border-orange-100">
-                    <h4 className="font-medium text-orange-700 mb-3 text-base md:text-lg">مشخصات فنی</h4>
+                  <div className="bg-orange-50 p-4 md:p-5 rounded-2xl border border-orange-100">
+                    <h4 className="font-medium text-orange-700 mb-3 text-sm md:text-lg">مشخصات فنی</h4>
                     <ul className="text-orange-600 space-y-2">
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center gap-2 text-sm md:text-base">
                         <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                         اسکلت بتنی با مقاومت بالا
                       </li>
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center gap-2 text-sm md:text-base">
                         <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                         عایق‌کاری حرارتی و صوتی پیشرفته
                       </li>
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center gap-2 text-sm md:text-base">
                         <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                         سیستم اعلام و اطفاء حریق
                       </li>
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center gap-2 text-sm md:text-base">
                         <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                         پنل خورشیدی برای تأمین بخشی از انرژی
                       </li>
@@ -491,11 +491,11 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
             </div>
 
             {/* جدول زمانی پروژه */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-              <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-6">جدول زمانی پروژه</h3>
+            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+              <h3 className="text-base md:text-xl font-bold text-gray-800 mb-6">جدول زمانی پروژه</h3>
               <div className="relative">
                 <div className="absolute left-0 top-4 bottom-4 w-1 bg-orange-100 ml-4"></div>
-                <div className="space-y-8 relative">
+                <div className="space-y-6 md:space-y-8 relative">
                   {[
                     { phase: "فاز اول: مطالعات و طراحی", progress: 100, date: "1402/05/10 - 1402/07/20" },
                     { phase: "فاز دوم: عملیات خاکی و اسکلت", progress: 100, date: "1402/07/21 - 1402/11/15" },
@@ -504,14 +504,14 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                   ].map((item, index) => (
                     <div key={index} className="flex gap-6">
 
-                      <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 flex-1">
+                      <div className="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex-1">
                         <div className="flex justify-between items-center mb-2">
-                          <h4 className="font-medium text-gray-800">{item.phase}</h4>
-                          <span className="text-sm text-gray-500">{toPersianNumber(item.date)}</span>
+                          <h4 className="font-medium text-gray-800 text-sm md:text-base">{item.phase}</h4>
+                          <span className="text-xs md:text-sm text-gray-500">{toPersianNumber(item.date)}</span>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2.5">
+                        <div className="w-full bg-gray-200 rounded-full h-2 md:h-2.5">
                           <div
-                            className="bg-blue-500 h-2.5 rounded-full transition-all duration-1000"
+                            className="bg-blue-500 h-2 md:h-2.5 rounded-full transition-all duration-1000"
                             style={{ width: `${item.progress}%` }}
                           ></div>
                         </div>
@@ -532,13 +532,13 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
               <div className="p-2 bg-blue-100 rounded-lg">
                 <Images className="text-blue-500 h-6 w-6" />
               </div>
-              <h2 className="text-xl md:text-2xl font-bold text-gray-800">گالری تصاویر</h2>
+              <h2 className="text-lg md:text-2xl font-bold text-gray-800">گالری تصاویر</h2>
               <span className="text-xs md:text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
                 {toPersianNumber(project.galleryImages.length)} تصویر
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
               {project.galleryImages.map((img, idx) => (
                 <div
                   key={idx}
@@ -548,7 +548,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                   <img
                     src={img}
                     alt={`تصویر ${idx + 1}`}
-                    className="w-full h-40 sm:h-48 md:h-60 object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-32 sm:h-44 md:h-60 object-cover transform group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -570,8 +570,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
           <div className="animate-in fade-in duration-500 mb-16">
             <div className="grid md:grid-cols-2 gap-8">
               {/* فرم تماس */}
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 min-w-0">
-                <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 min-w-0">
+                <h2 className="text-lg md:text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                   <div className="p-2 bg-blue-100 rounded-lg">
                     <MessageCircle className="text-blue-500 h-6 w-6" />
                   </div>
@@ -656,42 +656,42 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
 
               {/* اطلاعات تماس */}
               <div>
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-6">
-                  <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-5">اطلاعات تماس</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
+                <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 mb-6">
+                  <h3 className="text-base md:text-xl font-bold text-gray-800 mb-5">اطلاعات تماس</h3>
+                  <div className="space-y-3 md:space-y-4">
+                    <div className="flex items-center gap-4 p-3 md:p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
                       <div className="p-3 bg-blue-100 rounded-xl">
                         <MapPin className="text-blue-500 h-6 w-6" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">آدرس</p>
-                        <p className="font-medium text-gray-800">تهران، شهرک غرب، فاز ۶، بلوار فرحزادی</p>
+                        <p className="text-xs md:text-sm text-gray-500">آدرس</p>
+                        <p className="font-medium text-gray-800 text-sm md:text-base">تهران، شهرک غرب، فاز ۶، بلوار فرحزادی</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
+                    <div className="flex items-center gap-4 p-3 md:p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
                       <div className="p-3 bg-green-100 rounded-xl">
                         <Mail className="text-green-500 h-6 w-6" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">ایمیل</p>
-                        <p className="font-medium text-gray-800">info@example.com</p>
+                        <p className="text-xs md:text-sm text-gray-500">ایمیل</p>
+                        <p className="font-medium text-gray-800 text-sm md:text-base">info@example.com</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
+                    <div className="flex items-center gap-4 p-3 md:p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
                       <div className="p-3 bg-orange-100 rounded-xl">
                         <Phone className="text-orange-500 h-6 w-6" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">تلفن</p>
-                        <p className="font-medium text-gray-800">۰۲۱-۸۸۷۶۵۴۳۲</p>
+                        <p className="text-xs md:text-sm text-gray-500">تلفن</p>
+                        <p className="font-medium text-gray-800 text-sm md:text-base">۰۲۱-۸۸۷۶۵۴۳۲</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl text-white shadow-lg">
-                  <h3 className="text-lg md:text-xl font-bold mb-3">نیاز به مشاوره تخصصی دارید؟</h3>
-                  <p className="mb-5 opacity-90">کارشناسان ما آماده پاسخگویی به سوالات شما درباره این پروژه هستند.</p>
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-5 md:p-6 rounded-2xl text-white shadow-lg">
+                  <h3 className="text-base md:text-xl font-bold mb-3">نیاز به مشاوره تخصصی دارید؟</h3>
+                  <p className="mb-5 opacity-90 text-sm md:text-base">کارشناسان ما آماده پاسخگویی به سوالات شما درباره این پروژه هستند.</p>
                   <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 rounded-xl py-2.5 md:py-3 font-medium flex items-center justify-center gap-2 cursor-pointer">
                     <Phone className="h-5 w-5" />
                     درخواست مشاوره رایگان
@@ -708,7 +708,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {recentProjects.filter(p => p.id !== project.id).slice(0, 3).map(project => (
               <div key={project.id} className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 transition-all duration-300 hover:shadow-xl">
-                <div className="relative h-40 md:h-48 overflow-hidden">
+                <div className="relative h-36 md:h-48 overflow-hidden">
                   <img
                     src={project.mainImage}
                     alt={project.name}
@@ -719,8 +719,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                   </div>
                 </div>
                 <div className="p-4">
-                  <h4 className="font-semibold text-gray-800 mb-2">{project.name}</h4>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">پروژه ای مدرن با طراحی منحصر به فرد و امکانات پیشرفته</p>
+                  <h4 className="font-semibold text-gray-800 mb-2 text-sm md:text-base">{project.name}</h4>
+                  <p className="text-gray-600 text-xs md:text-sm mb-4 line-clamp-2">پروژه ای مدرن با طراحی منحصر به فرد و امکانات پیشرفته</p>
                   <Button
                     variant="outline"
                     className="w-full rounded-xl cursor-pointer"
