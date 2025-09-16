@@ -41,10 +41,12 @@ import { ProjectHeaderSkeleton } from "./SingleProjectSkeleton";
 import NotFound from "./NotFound";
 
 
-const SingleProject: React.FC = () => {
-  const params = useParams();
+interface SingleProjectProps {
+  id: number;
+}
+
+const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
   const router = useRouter();
-  const id = Number(params.id);
 
   const [project, setProject] = useState<typeof recentProjects[0] | null>(null);
   const [message, setMessage] = useState("");

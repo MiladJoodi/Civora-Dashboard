@@ -1,9 +1,11 @@
 import SingleProject from "@/components/SingleProject/SingleProject";
 
-const page = () => {
-  return (
-    <SingleProject />
-  );
+interface PageProps {
+  params: { id: string };
 }
 
-export default page;
+const Page = ({ params }: PageProps) => {
+  return <SingleProject id={Number(params.id)} />;
+};
+
+export default Page;
