@@ -39,6 +39,8 @@ import { recentProjects } from "@/components/SingleProject/data";
 import { toPersianNumber } from "@/lib/ToPersianNumber";
 import { ProjectHeaderSkeleton } from "./SingleProjectSkeleton";
 import NotFound from "./NotFound";
+import ProgressBar from "./ProgressBar";
+import Lightbox from "./Lightbox";
 
 
 interface SingleProjectProps {
@@ -69,22 +71,35 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
     setProject(found || null);
 
     const timer = setTimeout(() => {
-        setLoading(false) //
+      setLoading(false) //
     }, 3000);
 
     return () => clearTimeout(timer);
   }, [id]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.offsetHeight - window.innerHeight;
-      const scrollPercent = Math.min((scrollTop / docHeight) * 100, 100);
-      setScrollProgress(scrollPercent);
+    const container = document.querySelector("main") as HTMLElement | null;
+
+    const computeProgress = () => {
+      if (container) {
+        const scrollTop = container.scrollTop;
+        const scrollHeight = container.scrollHeight - container.clientHeight;
+        const percent = scrollHeight > 0 ? Math.min((scrollTop / scrollHeight) * 100, 100) : 0;
+        setScrollProgress(percent);
+      } else {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const percent = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+        setScrollProgress(percent);
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Initialize on mount
+    computeProgress();
+
+    const target: any = container || window;
+    target.addEventListener("scroll", computeProgress, { passive: true });
+    return () => target.removeEventListener("scroll", computeProgress);
   }, []);
 
   const handleSend = (e: React.FormEvent) => {
@@ -132,102 +147,43 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
   }, [lightboxOpen, closeLightbox, goToPrev, goToNext]);
 
   if (loading) {
-  return <ProjectHeaderSkeleton />
-}
+    return <ProjectHeaderSkeleton />
+  }
 
   if (!project) {
     return (
-     <NotFound />
+      <NotFound />
     );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30 relative overflow-hidden">
-      {/* پیشرفت اسکرول */}
-      <div className="fixed top-0 left-0 w-full h-1 z-50">
-        <div
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      <ProgressBar />
 
       {/* افکت های پس زمینه */}
-      {/* <div className="absolute top-0 left-0 w-full h-72 bg-gradient-to-b from-blue-500/5 to-transparent"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl"></div>
-      <div className="absolute top-1/3 left-0 w-80 h-80 bg-purple-400/5 rounded-full blur-3xl"></div> */}
+      {/* <div className="absolute top-0 left-0 w-full h-72 bg-gradient-to-b from-blue-500/5 to-transparent"></div> */}
+      {/* <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl"></div> */}
+      {/* <div className="absolute top-1/3 left-0 w-80 h-80 bg-purple-400/5 rounded-full blur-3xl"></div> */}
 
       {/* Lightbox برای نمایش تمام صفحه تصاویر */}
       {lightboxOpen && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center animate-in fade-in duration-300">
-          <button
-            onClick={closeLightbox}
-            className="absolute top-6 right-6 text-white p-2 rounded-full bg-black/50 hover:bg-white/20 transition-all duration-300 z-10"
-          >
-            <X size={30} />
-          </button>
-
-          <button
-            onClick={goToPrev}
-            className="absolute left-6 text-white p-3 rounded-full bg-black/50 hover:bg-white/20 transition-all duration-300 z-10"
-          >
-            <ChevronLeft size={36} />
-          </button>
-
-          <button
-            onClick={goToNext}
-            className="absolute right-6 text-white p-3 rounded-full bg-black/50 hover:bg-white/20 transition-all duration-300 z-10"
-          >
-            <ChevronRight size={36} />
-          </button>
-
-          <div className="relative max-w-5xl max-h-full w-full h-full flex items-center justify-center p-10">
-            <img
-              src={project.galleryImages[lightboxIndex]}
-              alt={`تصویر ${lightboxIndex + 1}`}
-              className="max-w-full max-h-full object-contain rounded-lg transform transition-transform duration-500"
-            />
-          </div>
-
-          <div className="absolute bottom-6 left-0 right-0 flex justify-center">
-            <div className="flex gap-2 p-2 bg-black/50 rounded-lg backdrop-blur-sm">
-              {project.galleryImages.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setLightboxIndex(idx)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${idx === lightboxIndex ? 'bg-orange-500 scale-110' : 'bg-white/50 hover:bg-white/80'
-                    }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="absolute top-6 left-6 flex gap-3">
-            <button className="text-white p-2.5 rounded-full bg-black/50 hover:bg-white/20 transition-all duration-300 backdrop-blur-sm">
-              <Download size={24} />
-            </button>
-            <button
-              className={`p-2.5 rounded-full transition-all duration-300 backdrop-blur-sm ${isFavorite ? 'bg-rose-500/20 text-rose-400' : 'bg-black/50 text-white hover:bg-white/20'
-                }`}
-              onClick={() => setIsFavorite(!isFavorite)}
-            >
-              <Heart size={24} fill={isFavorite ? "currentColor" : "none"} />
-            </button>
-            <button className="text-white p-2.5 rounded-full bg-black/50 hover:bg-white/20 transition-all duration-300 backdrop-blur-sm">
-              <Share size={24} />
-            </button>
-          </div>
-
-          <div className="absolute bottom-6 right-6 text-white text-sm bg-black/50 px-3 py-1.5 rounded-full backdrop-blur-sm">
-            {lightboxIndex + 1} / {project.galleryImages.length}
-          </div>
-        </div>
+        <Lightbox
+          closeLightbox={closeLightbox}
+          goToPrev={goToPrev}
+          goToNext={goToNext}
+          project={project}
+          lightboxIndex={lightboxIndex}
+          setLightboxIndex={setLightboxIndex}
+          isFavorite={isFavorite}
+          setIsFavorite={setIsFavorite}
+        />
       )}
 
       <div className="container max-w-6xl mx-auto px-4 py-8 relative z-10">
         {/* دکمه بازگشت */}
         <Button
           variant="ghost"
-          className="mb-8 flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-all duration-300 rounded-full px-4 py-2 hover:bg-blue-50/50 backdrop-blur-sm cursor-pointer mr-auto"
+          className="mb-8 flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-all duration-300 rounded-full px-3 py-2 md:px-4 hover:bg-blue-50/50 backdrop-blur-sm cursor-pointer mr-auto"
           onClick={() => router.back()}
         >
           بازگشت
@@ -357,13 +313,13 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
           </div>
 
           <div className="lg:w-2/5">
-            <div className="sticky top-24">
+            <div className="sticky top-16 md:top-24">
               <div className="relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-500 group">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                 <img
                   src={project.mainImage}
                   alt={project.name}
-                  className="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-56 sm:h-72 md:h-80 object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
                 <button
                   onClick={() => openLightbox(0)}
@@ -426,8 +382,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
             <button
               onClick={() => setActiveTab("details")}
               className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer text-sm md:text-base ${activeTab === "details"
-                  ? "bg-orange-400 text-white shadow-md"
-                  : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
+                ? "bg-orange-400 text-white shadow-md"
+                : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
                 }`}
             >
               <FileText className="h-4 w-4 md:h-5 md:w-5" />
@@ -436,8 +392,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
             <button
               onClick={() => setActiveTab("gallery")}
               className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer text-sm md:text-base ${activeTab === "gallery"
-                  ? "bg-orange-400 text-white shadow-md"
-                  : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
+                ? "bg-orange-400 text-white shadow-md"
+                : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
                 }`}
             >
               <Camera className="h-4 w-4 md:h-5 md:w-5" />
@@ -446,8 +402,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
             <button
               onClick={() => setActiveTab("contact")}
               className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer text-sm md:text-base ${activeTab === "contact"
-                  ? "bg-orange-400 text-white shadow-md"
-                  : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
+                ? "bg-orange-400 text-white shadow-md"
+                : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
                 }`}
             >
               <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
@@ -463,7 +419,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
             className="animate-in fade-in duration-500 mb-16"
           >
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                 <div className="p-2 bg-blue-100 rounded-lg">
                   <FileText className="text-blue-500 h-6 w-6" />
                 </div>
@@ -472,7 +428,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-700 mb-4 pb-2 border-b border-gray-200">ویژگی‌های پروژه</h3>
+                  <h3 className="text-base md:text-lg font-semibold text-gray-700 mb-4 pb-2 border-b border-gray-200">ویژگی‌های پروژه</h3>
                   <ul className="space-y-4">
                     <li className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
                       <div className="p-2 bg-orange-100 rounded-lg mt-0.5">
@@ -502,7 +458,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-700 mb-4 pb-2 border-b border-gray-200">جزئیات فنی</h3>
+                  <h3 className="text-base md:text-lg font-semibold text-gray-700 mb-4 pb-2 border-b border-gray-200">جزئیات فنی</h3>
                   <p className="text-gray-600 leading-relaxed text-justify mb-6">
                     این پروژه با رویکردی کاملاً حرفه‌ای و مطابق با آخرین استانداردهای معماری طراحی شده است.
                     تمامی بخش‌ها از طراحی داخلی گرفته تا سازه و محوطه‌سازی، با دقت و هماهنگی انجام شده‌اند.
@@ -510,7 +466,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                   </p>
 
                   <div className="bg-orange-50 p-5 rounded-2xl border border-orange-100">
-                    <h4 className="font-medium text-orange-700 mb-3 text-lg">مشخصات فنی</h4>
+                    <h4 className="font-medium text-orange-700 mb-3 text-base md:text-lg">مشخصات فنی</h4>
                     <ul className="text-orange-600 space-y-2">
                       <li className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
@@ -536,7 +492,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
 
             {/* جدول زمانی پروژه */}
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-              <h3 className="text-xl font-bold text-gray-800 mb-6">جدول زمانی پروژه</h3>
+              <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-6">جدول زمانی پروژه</h3>
               <div className="relative">
                 <div className="absolute left-0 top-4 bottom-4 w-1 bg-orange-100 ml-4"></div>
                 <div className="space-y-8 relative">
@@ -576,8 +532,8 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
               <div className="p-2 bg-blue-100 rounded-lg">
                 <Images className="text-blue-500 h-6 w-6" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-800">گالری تصاویر</h2>
-              <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800">گالری تصاویر</h2>
+              <span className="text-xs md:text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
                 {toPersianNumber(project.galleryImages.length)} تصویر
               </span>
             </div>
@@ -592,7 +548,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                   <img
                     src={img}
                     alt={`تصویر ${idx + 1}`}
-                    className="w-full h-60 object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-40 sm:h-48 md:h-60 object-cover transform group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -615,7 +571,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
             <div className="grid md:grid-cols-2 gap-8">
               {/* فرم تماس */}
               <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 min-w-0">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                   <div className="p-2 bg-blue-100 rounded-lg">
                     <MessageCircle className="text-blue-500 h-6 w-6" />
                   </div>
@@ -633,7 +589,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
-                      className="text-sm rounded-xl py-3 px-4 transition-all focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="text-sm rounded-xl py-2.5 md:py-3 px-4 transition-all focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
 
@@ -648,7 +604,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="text-sm rounded-xl py-3 px-4 transition-all focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="text-sm rounded-xl py-2.5 md:py-3 px-4 transition-all focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
 
@@ -661,7 +617,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                       placeholder={`متن پیام خود را اینجا تایپ کنید... (حداکثر ${toPersianNumber(500)} کاراکتر)`}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="text-sm resize-none min-h-[140px] text-gray-700 rounded-xl border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                      className="text-sm resize-none min-h-[120px] md:min-h-[140px] text-gray-700 rounded-xl border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                       maxLength={500}
                       required
                     />
@@ -680,7 +636,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                     <Button
                       type="submit"
                       disabled={!message.trim() || !name.trim() || !email.trim() || isSending}
-                      className="rounded-xl px-7 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer"
+                      className="rounded-xl px-5 py-2.5 sm:px-7 sm:py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer"
                     >
                       {isSending ? (
                         <>
@@ -701,7 +657,7 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
               {/* اطلاعات تماس */}
               <div>
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-5">اطلاعات تماس</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-5">اطلاعات تماس</h3>
                   <div className="space-y-4">
                     <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-md">
                       <div className="p-3 bg-blue-100 rounded-xl">
@@ -734,9 +690,9 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
                 </div>
 
                 <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl text-white shadow-lg">
-                  <h3 className="text-xl font-bold mb-3">نیاز به مشاوره تخصصی دارید؟</h3>
+                  <h3 className="text-lg md:text-xl font-bold mb-3">نیاز به مشاوره تخصصی دارید؟</h3>
                   <p className="mb-5 opacity-90">کارشناسان ما آماده پاسخگویی به سوالات شما درباره این پروژه هستند.</p>
-                  <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 rounded-xl py-3 font-medium flex items-center justify-center gap-2 cursor-pointer">
+                  <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 rounded-xl py-2.5 md:py-3 font-medium flex items-center justify-center gap-2 cursor-pointer">
                     <Phone className="h-5 w-5" />
                     درخواست مشاوره رایگان
                   </Button>
@@ -748,11 +704,11 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
 
         {/* بخش پروژه های مرتبط */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">پروژه های مشابه</h3>
+          <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-6">پروژه های مشابه</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {recentProjects.filter(p => p.id !== project.id).slice(0, 3).map(project => (
               <div key={project.id} className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 transition-all duration-300 hover:shadow-xl">
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-40 md:h-48 overflow-hidden">
                   <img
                     src={project.mainImage}
                     alt={project.name}

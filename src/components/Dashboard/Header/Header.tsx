@@ -4,13 +4,15 @@ import LastUpdate from "./LastUpdate";
 
 const Header = () => {
     return (
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <PageHeader
                 title="داشبورد مدیریت"
                 description="به سیستم مدیریت پروژه‌های سیورا خوش آمدید"
                 Icon={Home}
             />
-            <LastUpdate />
+            <div className="self-end sm:self-auto">
+                <LastUpdate />
+            </div>
         </div>
     );
 }

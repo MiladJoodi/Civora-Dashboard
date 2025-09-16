@@ -17,22 +17,22 @@ const statusColors: Record<string, string> = {
 
 export const ProjectsHeader: React.FC<ProjectsHeaderProps> = ({ filter, setFilter }) => {
   return (
-    <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+    <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
       <div className="flex gap-2">
         <BarChart3 className="w-5 h-5 text-blue-600" />
-        <div className="flex flex-col gap-1">
-          <CardTitle>پروژه‌های جدید</CardTitle>
-          <CardDescription>آخرین فعالیت‌های پروژه‌ها</CardDescription>
+        <div className="flex flex-col gap-0.5">
+          <CardTitle className="text-base sm:text-lg">پروژه‌های جدید</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">آخرین فعالیت‌های پروژه‌ها</CardDescription>
         </div>
       </div>
 
       {/* فیلتر پروژه‌ها */}
-      <div className="flex gap-2 mt-2 sm:mt-0">
+      <div className="flex flex-wrap gap-2 mt-1 sm:mt-0">
         {["همه", "در حال اجرا", "طراحی", "تکمیل"].map(status => (
           <button
             key={status}
             onClick={() => setFilter(status)}
-            className={`px-3 py-1 rounded-full text-sm font-medium transition cursor-pointer ${
+            className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition cursor-pointer ${
               filter === status ? statusColors[status] : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
