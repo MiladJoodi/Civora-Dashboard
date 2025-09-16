@@ -4,8 +4,10 @@ interface PageProps {
   params: { id: string };
 }
 
-const Page = ({ params }: PageProps) => {
-  return <SingleProject id={Number(params.id)} />;
+const Page = async ({ params }: PageProps) => {
+  const id = Number(params.id);
+
+  return <SingleProject id={id} />;
 };
 
 export default Page;
