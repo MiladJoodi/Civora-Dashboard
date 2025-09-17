@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Download, Search } from "lucide-react";
-import { Header } from "./header";
 import { FiFolderMinus } from "react-icons/fi";
 import { Separator } from "./ui/separator";
 import { Input } from "./ui/input";
+import { GlobalHeader } from "./shared/GlobalHeader/GlobalHeader";
 
 const projectData = [
   {
@@ -106,7 +106,7 @@ export function ProjectDetails() {
   return (
     <div>
       {/* Project Header */}
-      <Header />
+      <GlobalHeader />
 
       <Card className="rounded-none shadow-none border-t-transparent">
         <CardHeader className="pb-4">
