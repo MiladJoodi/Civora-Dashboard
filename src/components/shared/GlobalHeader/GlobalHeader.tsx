@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Search, Bell, MessageSquare, ChevronLeft } from "lucide-react";
 import { TbMessage2 } from "react-icons/tb";
 
-export function Header() {
+export function GlobalHeader() {
   return (
 <header className="bg-white border border-gray-200 px-6 py-3 rounded-t-lg">
       <div className="flex items-center justify-between">

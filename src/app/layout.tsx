@@ -2,9 +2,9 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Vazirmatn } from "next/font/google"
 import "./globals.css"
-import { Header } from "@/components/header"
 import { Sidebar } from "@/components/shared/Sidebar/Sidebar"
 import Footer from "@/components/shared/Footer/Footer"
+import { GlobalHeader } from "@/components/shared/GlobalHeader/GlobalHeader"
 
 
 const vazirmatn = Vazirmatn({
@@ -32,8 +32,8 @@ export default function RootLayout({
 
           {/* بخش اصلی سمت چپ */}
           <div className="flex-1 flex flex-col overflow-hidden">
-            <Header />
-            <main className="bg-white flex-1 overflow-y-auto px-3 py-3">
+            <GlobalHeader />
+            <main className="bg-white flex-1 overflow-y-auto">
               {children}
             <Footer />
             </main>

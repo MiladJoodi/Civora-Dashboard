@@ -33,7 +33,8 @@ import {
   Camera,
   TreePine,
   Shield,
-  Wifi
+  Wifi,
+  RefreshCw
 } from "lucide-react";
 import { recentProjects } from "@/components/SingleProject/data";
 import { toPersianNumber } from "@/lib/ToPersianNumber";
@@ -41,6 +42,9 @@ import { ProjectHeaderSkeleton } from "./SingleProjectSkeleton";
 import NotFound from "./NotFound";
 import ProgressBar from "./ProgressBar";
 import Lightbox from "./Lightbox";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import BackButton from "./BackButton";
+import SingleProjectHeader from "./SingleProjectHeader/SingleProjectHeader";
 
 
 interface SingleProjectProps {
@@ -160,12 +164,12 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30 relative overflow-hidden">
       <ProgressBar />
 
-      {/* افکت های پس زمینه */}
-      {/* <div className="absolute top-0 left-0 w-full h-72 bg-gradient-to-b from-blue-500/5 to-transparent"></div> */}
-      {/* <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl"></div> */}
-      {/* <div className="absolute top-1/3 left-0 w-80 h-80 bg-purple-400/5 rounded-full blur-3xl"></div> */}
+      {/* Background effects */}
+      <div className="absolute top-0 left-0 w-full h-72 bg-gradient-to-b from-orange-200/10 to-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-300/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/3 left-0 w-80 h-80 bg-orange-400/5 rounded-full blur-3xl"></div>
 
-      {/* Lightbox برای نمایش تمام صفحه تصاویر */}
+
       {lightboxOpen && (
         <Lightbox
           closeLightbox={closeLightbox}
@@ -180,204 +184,15 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
       )}
 
       <div className="container max-w-6xl mx-auto px-4 py-8 relative z-10">
-        {/* دکمه بازگشت */}
-        <Button
-          variant="ghost"
-          className="mb-8 flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-all duration-300 rounded-full px-2.5 py-1.5 md:px-4 hover:bg-blue-50/50 backdrop-blur-sm cursor-pointer mr-auto"
-          onClick={() => router.back()}
-        >
-          بازگشت
-          <ArrowLeft className="h-5 w-5" />
-        </Button>
 
-        {/* هدر پروژه */}
-        <div
-          ref={headerRef}
-          className="flex flex-col lg:flex-row gap-8 mb-16"
-        >
-          <div className="flex-1">
-            <div className="mb-8">
+        <BackButton />
 
-
-
-
-              <h1 className="text-3xl md:text-5xl font-bold text-gray-800 flex items-center gap-3 mb-4">
-                <div className="p-2 bg-gradient-to-br from-orange-300 to-orange-700 rounded-xl text-white">
-                  <Building2 className="h-8 w-8" />
-                </div>
-                {project.name}
-                <button
-                  onClick={() => setIsFavorite(!isFavorite)}
-                  className="p-1.5 md:p-2 text-amber-400 hover:text-amber-500 transition-colors cursor-pointer"
-                >
-                  <Star
-                    className="h-7 w-7"
-                    fill={isFavorite ? "currentColor" : "none"}
-                  />
-                </button>
-              </h1>
-
-              <div className="flex flex-wrap items-center gap-2.5 md:gap-3 mb-4 select-none">
-                <span className="px-2.5 py-1 bg-blue-100 text-blue-600 rounded-full text-xs md:text-sm flex items-center gap-1">
-                  <Award className="h-4 w-4" />
-                  پروژه برتر
-                </span>
-                <span className="px-2.5 py-1 bg-green-100 text-green-600 rounded-full text-xs md:text-sm flex items-center gap-1">
-                  <CheckCircle className="h-4 w-4" />
-                  تضمین کیفیت
-                </span>
-              </div>
-
-
-              <p className="text-gray-600 max-w-3xl leading-relaxed text-sm md:text-base">
-                <span className="font-semibold text-blue-500">{project.name}</span> یک طرح مدرن و پیشرفته در حوزه ساخت‌وساز با استانداردهای بین‌المللی و طراحی منحصر به فرد است.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl shadow-sm border border-gray-100">
-                <Calendar className="h-5 w-5 text-orange-300" />
-                <span className="text-gray-700 text-sm md:text-base">شروع: <span className="font-medium">شهریور {toPersianNumber(1402)}</span></span>
-              </div>
-              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl shadow-sm border border-gray-100">
-                <MapPin className="h-5 w-5 text-orange-300" />
-                <span className="text-gray-700 text-sm md:text-base">تهران، شهرک غرب</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl shadow-sm border border-gray-100">
-                <Users className="h-5 w-5 text-orange-300" />
-                <span className="text-gray-700 text-sm md:text-base">تیم: <span className="font-medium">۵ نفر</span></span>
-              </div>
-            </div>
-
-            <div className="bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2 text-base md:text-lg">
-                <Sparkles className="h-5 w-5 text-amber-500" />
-                خلاصه پروژه
-              </h3>
-              <p className="text-gray-600 leading-relaxed text-sm md:text-base">
-                {project.name} با هدف ایجاد فضایی مدرن و کارآمد در حوزه ساختمان‌های مسکونی و تجاری طراحی شده است. این پروژه شامل مجموعه‌ای از امکانات پیشرفته، فضاهای سبز و طراحی مهندسی دقیق است که مطابق با استانداردهای روز دنیا پیاده‌سازی شده است.
-              </p>
-
-              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-start gap-2">
-                  <div className="bg-gray-100 p-2 rounded-lg">
-                    <MapPin className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 text-sm md:text-base">موقعیت مکانی</h4>
-                    <p className="text-xs md:text-sm text-gray-600">دسترسی عالی به مراکز تجاری و حمل و نقل عمومی</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2">
-                  <div className="bg-gray-100 p-2 rounded-lg">
-                    <TreePine className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 text-sm md:text-base">فضای سبز</h4>
-                    <p className="text-xs md:text-sm text-gray-600">طراحی شده با ۴۰٪ فضای سبز و پارک‌های محلی</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2">
-                  <div className="bg-gray-100 p-2 rounded-lg">
-                    <Shield className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 text-sm md:text-base">امنیت</h4>
-                    <p className="text-xs md:text-sm text-gray-600">سیستم نظارتی پیشرفته و کنترل تردد ۲۴ ساعته</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2">
-                  <div className="bg-gray-100 p-2 rounded-lg">
-                    <Wifi className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 text-sm md:text-base">امکانات هوشمند</h4>
-                    <p className="text-xs md:text-sm text-gray-600">مجهز به سیستم خانه هوشمند و اینترنت پرسرعت</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 sm:mt-4 p-3 sm:p-4 bg-gray-50 rounded-lg border border-gray-200">
-  <h4 className="font-medium text-gray-800 mb-2 text-sm sm:text-base">
-    اهداف کلیدی پروژه:
-  </h4>
-  <ul className="list-disc list-inside text-gray-600 space-y-1 sm:space-y-1.5 text-xs sm:text-sm">
-    <li>ایجاد محیطی پایدار با مصرف بهینه انرژی</li>
-    <li>استفاده از مصالح ساختمانی با کیفیت و دوستدار محیط زیست</li>
-    <li>تأمین نیازهای ساکنین با طراحی کاربرمحور و انعطاف‌پذیر</li>
-    <li>ارائه خدمات رفاهی و تفریحی متنوع برای تمامی گروه‌های سنی</li>
-  </ul>
-</div>
-
-            </div>
-          </div>
-
-          <div className="lg:w-2/5">
-            <div className="sticky top-16 md:top-24">
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-500 group">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
-                <img
-                  src={project.mainImage}
-                  alt={project.name}
-                  className="w-full h-44 sm:h-60 md:h-80 object-cover transform group-hover:scale-105 transition-transform duration-700"
-                />
-                <button
-                  onClick={() => openLightbox(0)}
-                  className="absolute top-4 right-4 p-2 bg-black/40 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 backdrop-blur-sm"
-                >
-                  <Expand size={22} />
-                </button>
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-white z-20">
-                  <span className="font-medium text-lg">تصویر اصلی پروژه</span>
-                  <p className="text-sm mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">برای مشاهده در اندازه بزرگتر کلیک کنید</p>
-                </div>
-              </div>
-
-
-
-              {/* آمار و ارقام پروژه */}
-              <div className="grid grid-cols-2 gap-3 md:gap-4 mt-18">
-                <div className="bg-white p-3 rounded-xl border border-gray-100 text-center group hover:border-blue-200 transition-all duration-300">
-                  <div className="bg-blue-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-blue-100 transition-colors">
-                    <BarChart3 className="h-6 w-6 text-blue-500" />
-                  </div>
-                  <div className="text-lg md:text-xl font-semibold text-gray-800">۲۴۰۰</div>
-                  <div className="text-xs text-gray-400 mt-1">متر مربع</div>
-                </div>
-
-                <div className="bg-white p-3 rounded-xl border border-gray-100 text-center group hover:border-green-200 transition-all duration-300">
-                  <div className="bg-green-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-green-100 transition-colors">
-                    <Clock className="h-6 w-6 text-green-500" />
-                  </div>
-                  <div className="text-lg md:text-xl font-semibold text-gray-800">۸۵٪</div>
-                  <div className="text-xs text-gray-400 mt-1">پیشرفت</div>
-                </div>
-
-                <div className="bg-white p-3 rounded-xl border border-gray-100 text-center group hover:border-purple-200 transition-all duration-300">
-                  <div className="bg-purple-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-purple-100 transition-colors">
-                    <Building2 className="h-6 w-6 text-purple-500" />
-                  </div>
-                  <div className="text-lg md:text-xl font-semibold text-gray-800">۱۸</div>
-                  <div className="text-xs text-gray-400 mt-1">طبقه</div>
-                </div>
-
-                <div className="bg-white p-3 rounded-xl border border-gray-100 text-center group hover:border-amber-200 transition-all duration-300">
-                  <div className="bg-amber-50 p-2 rounded-lg inline-flex mb-2 group-hover:bg-amber-100 transition-colors">
-                    <CheckCircle className="h-6 w-6 text-amber-500" />
-                  </div>
-                  <div className="text-lg md:text-xl font-semibold text-gray-800">۴۵</div>
-                  <div className="text-xs text-gray-400 mt-1">واحد</div>
-                </div>
-              </div>
-
-
-
-            </div>
-          </div>
-        </div>
+        <SingleProjectHeader projectName={project.name}
+          projectMainImage={project.mainImage}
+          setIsFavorite={setIsFavorite}
+          isFavorite={isFavorite}
+          openLightbox={openLightbox}
+        />
 
         {/* تب های ناوبری */}
         <div className="rounded-2xl shadow-sm border border-gray-100 p-2 mb-10 sticky top-4 md:top-20 z-30 backdrop-blur-sm bg-white/90">
@@ -495,41 +310,41 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
 
             {/* جدول زمانی پروژه */}
             <div className="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-gray-100">
-  <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 mb-4 sm:mb-6">
-    جدول زمانی پروژه
-  </h3>
-  <div className="relative">
-    <div className="absolute left-0 top-4 bottom-4 w-1 bg-orange-100 ml-3 sm:ml-4"></div>
-    <div className="space-y-4 sm:space-y-6 md:space-y-8 relative">
-      {[
-        { phase: "فاز اول: مطالعات و طراحی", progress: 100, date: "1402/05/10 - 1402/07/20" },
-        { phase: "فاز دوم: عملیات خاکی و اسکلت", progress: 100, date: "1402/07/21 - 1402/11/15" },
-        { phase: "فاز سوم: تاسیسات و نازک کاری", progress: 85, date: "1402/11/16 - 1403/04/10" },
-        { phase: "فاز چهارم: تکمیل و تحویل", progress: 30, date: "1403/04/11 - 1403/08/01" },
-      ].map((item, index) => (
-        <div key={index} className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-          <div className="bg-gray-50 p-3 sm:p-4 rounded-xl border border-gray-100 flex-1">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-              <h4 className="font-medium text-gray-800 text-sm sm:text-base">{item.phase}</h4>
-              <span className="text-xs sm:text-sm text-gray-500 mt-1 sm:mt-0">
-                {toPersianNumber(item.date)}
-              </span>
+              <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 mb-4 sm:mb-6">
+                جدول زمانی پروژه
+              </h3>
+              <div className="relative">
+                <div className="absolute left-0 top-4 bottom-4 w-1 bg-orange-100 ml-3 sm:ml-4"></div>
+                <div className="space-y-4 sm:space-y-6 md:space-y-8 relative">
+                  {[
+                    { phase: "فاز اول: مطالعات و طراحی", progress: 100, date: "1402/05/10 - 1402/07/20" },
+                    { phase: "فاز دوم: عملیات خاکی و اسکلت", progress: 100, date: "1402/07/21 - 1402/11/15" },
+                    { phase: "فاز سوم: تاسیسات و نازک کاری", progress: 85, date: "1402/11/16 - 1403/04/10" },
+                    { phase: "فاز چهارم: تکمیل و تحویل", progress: 30, date: "1403/04/11 - 1403/08/01" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                      <div className="bg-gray-50 p-3 sm:p-4 rounded-xl border border-gray-100 flex-1">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                          <h4 className="font-medium text-gray-800 text-sm sm:text-base">{item.phase}</h4>
+                          <span className="text-xs sm:text-sm text-gray-500 mt-1 sm:mt-0">
+                            {toPersianNumber(item.date)}
+                          </span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2 sm:h-2.5">
+                          <div
+                            className="bg-blue-500 h-2 sm:h-2.5 rounded-full transition-all duration-1000"
+                            style={{ width: `${item.progress}%` }}
+                          />
+                        </div>
+                        <div className="text-xs text-gray-500 mt-2 text-left">
+                          {toPersianNumber(item.progress)}% تکمیل شده
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2 sm:h-2.5">
-              <div
-                className="bg-blue-500 h-2 sm:h-2.5 rounded-full transition-all duration-1000"
-                style={{ width: `${item.progress}%` }}
-              />
-            </div>
-            <div className="text-xs text-gray-500 mt-2 text-left">
-              {toPersianNumber(item.progress)}% تکمیل شده
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
 
           </div>
         )}
