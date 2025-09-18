@@ -41,10 +41,11 @@ import { toPersianNumber } from "@/lib/ToPersianNumber";
 import { ProjectHeaderSkeleton } from "./SingleProjectSkeleton";
 import NotFound from "./NotFound";
 import ProgressBar from "./ProgressBar";
-import Lightbox from "./Lightbox";
+import Lightbox from "./Lightbox/Lightbox";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import BackButton from "./BackButton";
 import SingleProjectHeader from "./SingleProjectHeader/SingleProjectHeader";
+import SingleProjectTabs from "./SingleProjectTabs/SingleProjectTabs";
 
 
 interface SingleProjectProps {
@@ -194,41 +195,9 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
           openLightbox={openLightbox}
         />
 
-        {/* تب های ناوبری */}
-        <div className="rounded-2xl shadow-sm border border-gray-100 p-2 mb-10 sticky top-4 md:top-20 z-30 backdrop-blur-sm bg-white/90">
-          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-            <button
-              onClick={() => setActiveTab("details")}
-              className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer text-sm md:text-base ${activeTab === "details"
-                ? "bg-orange-400 text-white shadow-md"
-                : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
-                }`}
-            >
-              <FileText className="h-4 w-4 md:h-5 md:w-5" />
-              جزئیات
-            </button>
-            <button
-              onClick={() => setActiveTab("gallery")}
-              className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer text-sm md:text-base ${activeTab === "gallery"
-                ? "bg-orange-400 text-white shadow-md"
-                : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
-                }`}
-            >
-              <Camera className="h-4 w-4 md:h-5 md:w-5" />
-              گالری ({toPersianNumber(project.galleryImages.length)})
-            </button>
-            <button
-              onClick={() => setActiveTab("contact")}
-              className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer text-sm md:text-base ${activeTab === "contact"
-                ? "bg-orange-400 text-white shadow-md"
-                : "text-gray-600 hover:text-orange-500 hover:bg-blue-50/50"
-                }`}
-            >
-              <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
-              تماس
-            </button>
-          </div>
-        </div>
+        <SingleProjectTabs setActiveTab={setActiveTab}
+          activeTab={activeTab}
+          projectGalleryImagesLength={project.galleryImages.length} />
 
         {/* محتوای تب جزئیات */}
         {activeTab === "details" && (

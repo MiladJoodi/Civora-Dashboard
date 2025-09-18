@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Download, Heart, Share, X, Maximize, Minimize, RotateCw } from "lucide-react";
-import { Project } from "./data";
+import { Project } from "../data";
 import { toPersianNumber } from "@/lib/ToPersianNumber";
 import { useState, useEffect } from "react";
 
