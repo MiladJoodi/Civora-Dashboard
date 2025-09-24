@@ -1,48 +1,11 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import {
-  Send,
-  Images,
-  FileText,
-  MessageCircle,
-  ArrowLeft,
-  Calendar,
-  MapPin,
-  Users,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Download,
-  Expand,
-  Heart,
-  Share,
-  Phone,
-  Mail,
-  Clock,
-  Award,
-  CheckCircle,
-  BarChart3,
-  Building2,
-  Sparkles,
-  Star,
-  Camera,
-  TreePine,
-  Shield,
-  Wifi,
-  RefreshCw
-} from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
 import { recentProjects } from "@/components/SingleProject/data";
-import { toPersianNumber } from "@/lib/ToPersianNumber";
 import { ProjectHeaderSkeleton } from "./SingleProjectSkeleton";
 import NotFound from "./NotFound";
 import ProgressBar from "./ProgressBar";
 import Lightbox from "./Lightbox/Lightbox";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import BackButton from "./BackButton";
 import SingleProjectHeader from "./SingleProjectHeader/SingleProjectHeader";
 import SingleProjectTabs from "./SingleProjectTabs/SingleProjectTabs";
@@ -51,13 +14,11 @@ import GalleryTab from "./SingleProjectTabs/GalleryTab/GalleryTab";
 import ContactTab from "./SingleProjectTabs/ContactTab/ContactTab";
 import SimilarProjects from "./SimilarProjects/SimilarProjects";
 
-
 interface SingleProjectProps {
   id: number;
 }
 
 const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
-  const router = useRouter();
 
   const [project, setProject] = useState<typeof recentProjects[0] | null>(null);
   const [message, setMessage] = useState("");
@@ -171,7 +132,6 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-300/10 rounded-full blur-3xl"></div>
       <div className="absolute top-1/3 left-0 w-80 h-80 bg-orange-400/5 rounded-full blur-3xl"></div>
 
-
       {lightboxOpen && (
         <Lightbox
           closeLightbox={closeLightbox}
@@ -229,7 +189,6 @@ const SingleProject: React.FC<SingleProjectProps> = ({ id }) => {
         />
 
       </div>
-
 
     </div>
   );

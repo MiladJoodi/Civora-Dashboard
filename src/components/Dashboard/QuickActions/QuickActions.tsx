@@ -1,11 +1,11 @@
 import RecentProjects from "./RecentProjects/RecentProjects";
-import InventoryStatus from "./InventoryStatus";
+import InventoryStatus from "./InventoryStatus/InventoryStatus";
 
 const QuickActions = () => {
     return (
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
             <RecentProjects />
-            {/* <InventoryStatus /> */}
+            <InventoryStatus />
         </div>
     );
 }

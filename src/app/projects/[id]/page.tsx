@@ -1,4 +1,3 @@
-// app/projects/[id]/page.tsx
 import SingleProject from "@/components/SingleProject/SingleProject";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {

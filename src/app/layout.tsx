@@ -31,7 +31,7 @@ export default function RootLayout({
           <Sidebar />
 
           {/* بخش اصلی سمت چپ */}
-          <div className="flex-1 flex flex-col overflow-hidden">
+          <div className="flex flex-col flex-1 overflow-hidden">
             <GlobalHeader />
             <main className="bg-white flex-1 overflow-y-auto">
               {children}
