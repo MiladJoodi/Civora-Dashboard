@@ -102,7 +102,7 @@ const QuickGuideCard = () => {
                         <Zap className="w-4 h-4 text-yellow-500" />
                         <div>
                             <p className="text-sm font-medium text-gray-900">نکته مهم</p>
-                            <p className="text-sm text-gray-600">می‌توانید همزمان از چندین سرویس استفاده کنید</p>
+                            <p className="text-sm text-gray-600">می‌توانید همزمان از سرویس استفاده کنید</p>
                         </div>
                     </div>
                 </div>
