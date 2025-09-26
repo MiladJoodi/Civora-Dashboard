@@ -205,14 +205,14 @@ export function Sidebar() {
           {/* Logo and Toggle */}
           <div className="px-4 py-2 flex items-center justify-between">
             {!collapsed && <div className="flex items-center">
-      <Link href="/" className="flex items-center">
-        <img
-          src="/logo.png"
-          alt="Civora Logo"
-          className="h-4 w-auto cursor-pointer hover:opacity-80 transition-opacity"
-        />
-      </Link>
-    </div>}
+              <Link href="/" className="flex items-center">
+                <img
+                  src="/logo.png"
+                  alt="Civora Logo"
+                  className="h-4 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+                />
+              </Link>
+            </div>}
             <Button variant="ghost" size="sm" onClick={() => setCollapsed(!collapsed)} className="p-1 cursor-pointer">
               <PanelRightOpen className={`!h-5 !w-5 text-gray-300 transition-transform ${collapsed ? "rotate-0" : "rotate-180"}`} />
             </Button>
@@ -235,6 +235,8 @@ export function Sidebar() {
                     onClick={() => {
                       if (hasSubmenus && !collapsed) {
                         toggleSubmenu(item.id)
+                        handleNavigation(item.route)
+
                       } else {
                         handleNavigation(item.route)
                       }
@@ -280,12 +282,12 @@ export function Sidebar() {
           <div className="p-4 border-t border-gray-200">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-orange-200 flex items-center justify-center text-sm font-bold text-orange-700">
-                ح
+                م
               </div>
               {!collapsed && (
                 <div className="flex flex-col">
                   <span className="text-sm font-medium text-gray-800">
-                    حمید علی‌محمدی
+                    میلاد جودی
                   </span>
                   <span className="text-xs text-gray-500">مدیر پروژه</span>
                 </div>

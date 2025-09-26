@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { Clock3, RefreshCw } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { Badge } from "@/components/ui/badge"
 
 interface LastUpdateProps {
     className?: string
@@ -48,35 +49,32 @@ export default function LastUpdate({ className = "" }: LastUpdateProps) {
     }
 
     return (
-        <div className={`inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/60 backdrop-blur px-2 py-1 text-xs text-gray-600 shadow-sm hover:shadow transition ${className}`}>
+        <Badge className={`inline-flex items-center gap-2 rounded-md border border-orange-200 bg-orange-50 text-xs text-orange-700 shadow-sm hover:shadow transition ${className}`}>
             <span className="relative flex items-center">
-                <Clock3 className="w-4 h-4 text-blue-500" />
                 {justUpdated && (
-                    <span className="absolute -right-1 -top-0.5 inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-400"></span>
+                    <span className="absolute -right-1 inline-flex h-2 w-2 animate-ping rounded-full bg-orange-400"></span>
                 )}
             </span>
-            <span className="text-gray-700">آخرین بروزرسانی:</span>
-
-            <span className="min-w-[2.75rem] tabular-nums font-medium text-blue-600">
+            <span className="hidden sm:block text-orange-700">آخرین بروزرسانی:</span>
+            <span className="min-w-[2.75rem] tabular-nums font-medium text-orange-700">
                 {time ? time : (
-                    <span className="inline-block w-4 h-4 border-2 border-blue-500/60 border-t-transparent rounded-full animate-spin" />
+                    <span className="inline-block w-4 h-4 border-2 border-orange-500/60 border-t-transparent rounded-full animate-spin" />
                 )}
             </span>
-
             <Tooltip>
                 <TooltipTrigger asChild>
                     <button
                         onClick={refreshTime}
                         aria-label="بروزرسانی زمان"
-                        className="w-6 h-6 rounded-full flex items-center justify-center text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition cursor-pointer"
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-orange-500 hover:text-orange-700 hover:bg-orange-100 transition cursor-pointer"
                     >
                         <RefreshCw className={`w-4 h-4 ${refreshing ? "animate-spin" : ""}`} />
                     </button>
                 </TooltipTrigger>
-                <TooltipContent className="bg-orange-100/50 text-[#da8439] border border-orange-300 shadow-md">
+                <TooltipContent className="bg-orange-50 text-orange-700 border border-orange-200 shadow-md">
                     بروزرسانی
                 </TooltipContent>
             </Tooltip>
-        </div>
+        </Badge>
     )
 }

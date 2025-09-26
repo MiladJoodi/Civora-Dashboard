@@ -33,9 +33,11 @@ export default function RootLayout({
           {/* بخش اصلی سمت چپ */}
           <div className="flex flex-col flex-1 overflow-hidden">
             <GlobalHeader />
-            <main className="bg-white flex-1 overflow-y-auto">
-              {children}
-            <Footer />
+            <main className="bg-white flex-1 overflow-y-auto p-3">
+              <div className="container mx-auto">
+                {children}
+              </div>
+              <Footer />
             </main>
           </div>
         </div>
