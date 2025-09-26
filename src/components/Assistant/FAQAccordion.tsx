@@ -31,7 +31,6 @@ const FAQsAccordion = () => {
             <Accordion
                 type="single"
                 collapsible
-                defaultValue="faq-0"
                 className="mt-2 space-y-2 flex-1"
             >
                 {faqs.map((faq, index) => (
@@ -41,7 +40,7 @@ const FAQsAccordion = () => {
                         className={`rounded-lg bg-gray-50 border-gray-200 ${index !== faqs.length - 1 ? "border-b" : ""
                             }`}
                     >
-                        <AccordionTrigger className="flex items-center font-normal justify-between gap-2 p-3 text-gray-700 text-sm hover:bg-gray-100 transition cursor-pointer">
+                        <AccordionTrigger className="flex items-center text-right font-normal justify-between gap-2 p-3 text-gray-700 text-sm hover:bg-gray-100 transition cursor-pointer">
                             {faq.question}
                         </AccordionTrigger>
                         <AccordionContent className="p-3 font-medium text-gray-600 text-sm">

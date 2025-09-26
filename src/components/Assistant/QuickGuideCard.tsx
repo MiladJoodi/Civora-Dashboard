@@ -48,7 +48,7 @@ const QuickGuideCard = () => {
                         <Sparkles className="w-6 h-6 text-orange-500" />
                     </div>
                     <div className="flex flex-col gap-1">
-                        <CardTitle className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                        <CardTitle className="text-lg sm:text-xl font-bold">
                             چگونه شروع کنیم؟
                         </CardTitle>
                         <CardDescription className="text-xs sm:text-sm text-gray-600 flex items-center gap-1">

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -61,7 +61,7 @@ const RecentActivitiesCard = () => {
                             <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white animate-pulse" />
                         </div>
                         <div className="flex flex-col gap-1">
-                            <CardTitle className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                            <CardTitle className="text-lg sm:text-xl font-bold">
                                 فعالیت‌های اخیر
                             </CardTitle>
                             <CardDescription className="text-xs sm:text-sm text-gray-600 flex items-center gap-1">
@@ -109,7 +109,7 @@ const RecentActivitiesCard = () => {
                                                 <span className="font-semibold text-gray-900 text-sm">{chat.user}</span>
                                                 <Badge
                                                     variant="outline"
-                                                    className="text-xs px-2 py-0 border-gray-300/60 bg-white/80 flex items-center gap-1"
+                                                    className="hidden md:flex text-xs px-2 py-0 border-gray-300/60 bg-white/80 items-center gap-1"
                                                 >
                                                     {getChatTypeIcon(chat.type)}
                                                     {chat.type === "ai-chat" ? "چت هوشمند" : "میز کمک"}
@@ -124,28 +124,30 @@ const RecentActivitiesCard = () => {
 
                                     {/* وضعیت با آیکون */}
                                     <Badge
-                                        className={`
-                                            px-3 py-1.5 text-xs font-medium border-0 shadow-sm
-                                            flex items-center gap-1.5 transition-all duration-300
-                                            group-hover:scale-105
-                                            ${chat.status === "answered"
-                                                ? "bg-green-50 text-green-700 border border-green-200/50"
-                                                : chat.status === "pending"
-                                                    ? "bg-yellow-50 text-yellow-700 border border-yellow-200/50"
-                                                    : "bg-blue-50 text-blue-700 border border-blue-200/50"}
-                                        `}
-                                    >
-                                        {getStatusIcon(chat.status)}
-                                        {chat.status === "answered"
-                                            ? "پاسخ داده شده"
-                                            : chat.status === "pending"
-                                                ? "در انتظار"
-                                                : "در حال بررسی"}
-                                    </Badge>
+  className={`
+    px-3 py-1.5 text-xs font-medium border-0 shadow-sm
+    flex items-center gap-1.5 transition-all duration-300
+    group-hover:scale-105
+    ${chat.status === "answered"
+      ? "bg-green-50 text-green-700 border border-green-200/50"
+      : chat.status === "pending"
+        ? "bg-yellow-50 text-yellow-700 border border-yellow-200/50"
+        : "bg-blue-50 text-blue-700 border border-blue-200/50"}
+  `}
+>
+  {getStatusIcon(chat.status)}
+  <span className="hidden sm:inline">
+    {chat.status === "answered"
+      ? "پاسخ داده شده"
+      : chat.status === "pending"
+        ? "در انتظار"
+        : "در حال بررسی"}
+  </span>
+</Badge>
                                 </div>
 
                                 {/* متن پیام */}
-                                <p className="text-sm text-gray-700 leading-6 mb-3 pr-2 border-r-2 border-orange-200/30 group-hover:border-orange-300/50 transition-colors duration-300">
+                                <p className="text-xs sm:text-sm text-gray-700 leading-6 mb-3 pr-2 border-r-2 border-orange-200/30 group-hover:border-orange-300/50 transition-colors duration-300">
                                     {chat.message}
                                 </p>
 
@@ -173,12 +175,12 @@ const RecentActivitiesCard = () => {
                 </div>
 
                 {/* فوتر کارت */}
-                <div className="mt-6 pt-4 border-t border-gray-200/50 flex items-center justify-between">
-                    <span className="text-sm text-gray-500 flex items-center gap-1">
+                <div className="flex flex-col md:flex-row gap-2 items-center justify-between mt-6 pt-4 border-t border-gray-200/50">
+                    <span className="hidden sm:flex text-sm text-gray-500 items-center gap-1">
                         <Sparkles className="w-3 h-3 text-orange-400" />
                         به روز شده در لحظه
                     </span>
-                    <button className="text-sm text-orange-600 hover:text-orange-700 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-orange-50 hover:bg-orange-100 transition-all duration-200 cursor-pointer">
+                    <button className="w-full sm:w-auto text-sm text-orange-600 hover:text-orange-700 flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg bg-orange-50 hover:bg-orange-100 transition-all duration-200 cursor-pointer">
                         مشاهده همه فعالیت‌ها
                         <ArrowLeft className="w-3 h-3" />
                     </button>

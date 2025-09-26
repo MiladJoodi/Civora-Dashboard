@@ -8,7 +8,7 @@ export default function AssistantPage() {
 
 
   return (
-    <div className=" space-y-6 px-3 container mx-auto">
+    <div className="space-y-6 px-3 container mx-auto">
       <AssistantHeader />
       <StatsGrid stats={assistantStats} />
       <QuickActionsGrid />

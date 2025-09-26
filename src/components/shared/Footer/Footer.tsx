@@ -10,7 +10,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     {/* بخش درباره ما */}
                     <div className="space-y-4">
-                        <h4 className="text-xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
+                        <h4 className="text-xl font-bold mb-4 text-orange-500">
                             درباره ما
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -49,7 +49,7 @@ const Footer = () => {
 
                     {/* لینک های سریع */}
                     <div>
-                        <h4 className="text-xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
+                        <h4 className="text-xl font-bold mb-4 text-orange-500">
                             لینک‌های سریع
                         </h4>
                         <ul className="space-y-3">
@@ -69,7 +69,7 @@ const Footer = () => {
 
                     {/* تماس با ما */}
                     <div>
-                        <h4 className="text-xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
+                        <h4 className="text-xl font-bold mb-4 text-orange-500">
                             تماس با ما
                         </h4>
                         <ul className="space-y-3">
@@ -96,7 +96,7 @@ const Footer = () => {
 
                     {/* خبرنامه */}
                     <div>
-                        <h4 className="text-xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
+                        <h4 className="text-xl font-bold mb-4 text-orange-500">
                             خبرنامه
                         </h4>
                         <p className="text-gray-600 text-sm mb-4">
