@@ -20,7 +20,7 @@ export const ProjectsHeader: React.FC<ProjectsHeaderProps> = ({ filter, setFilte
     <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
       <div className="flex items-center gap-2">
         <div className="p-2 rounded-lg bg-orange-100 flex items-center justify-center">
-        <BarChart3 className="w-5 h-5 text-orange-400" />  </div>
+          <BarChart3 className="w-5 h-5 text-orange-400" />  </div>
         <div className="flex flex-col gap-0.5">
           <CardTitle className="text-base sm:text-lg">پروژه‌های جدید</CardTitle>
           <CardDescription className="text-xs sm:text-sm">آخرین فعالیت‌های پروژه‌ها</CardDescription>
@@ -33,9 +33,8 @@ export const ProjectsHeader: React.FC<ProjectsHeaderProps> = ({ filter, setFilte
           <button
             key={status}
             onClick={() => setFilter(status)}
-            className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition cursor-pointer ${
-              filter === status ? statusColors[status] : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
+            className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition cursor-pointer ${filter === status ? statusColors[status] : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
           >
             {status}
           </button>
