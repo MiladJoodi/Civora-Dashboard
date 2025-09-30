@@ -1,30 +1,10 @@
-import {
-    Accordion,
-    AccordionItem,
-    AccordionTrigger,
-    AccordionContent,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { ArrowLeft } from "lucide-react";
+import { faqs } from "./data";
+import { Button } from "@/components/ui/button";
 
 const FAQsAccordion = () => {
-    const faqs = [
-        {
-            question: "چطور می‌توان یک چت جدید شروع کنم؟",
-            answer: "روی دکمه 'شروع چت' کلیک کنید."
-        },
-        {
-            question: "میانگین زمان پاسخ چقدر است؟",
-            answer: "حدود ۲ تا ۵ دقیقه."
-        },
-        {
-            question: "چگونه گزارش فعالیت‌ها را مشاهده کنم؟",
-            answer: "به بخش 'فعالیت‌های اخیر' مراجعه کنید."
-        },
-        {
-            question: "آیا می‌توان از سرویس‌ همزمان استفاده کنم؟",
-            answer: "بله، همزمان می‌توانید استفاده کنید."
-        }
-    ];
+
 
     return (
         <div className="flex flex-col">
@@ -50,10 +30,10 @@ const FAQsAccordion = () => {
                 ))}
             </Accordion>
 
-            <button className="mt-2 w-full flex items-center justify-center gap-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition cursor-pointer">
+            <Button className="mt-2 w-full flex items-center justify-center gap-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition cursor-pointer">
                 مشاهده همه سوالات متداول
                 <ArrowLeft className="w-3 h-3" />
-            </button>
+            </Button>
         </div>
     );
 };

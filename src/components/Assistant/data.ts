@@ -11,6 +11,7 @@ export const recentChats = [
     {
         id: 1,
         user: "احمد محمدی",
+        avatar: "/avatars/user1.jpg",
         message: "چگونه می‌توانم گزارش پیشرفت پروژه تهیه کنم؟",
         time: "10 دقیقه پیش",
         status: "answered",
@@ -19,6 +20,7 @@ export const recentChats = [
     {
         id: 2,
         user: "فاطمه احمدی",
+        avatar: "/avatars/user2.jpg",
         message: "مشکل در دسترسی به فایل‌های پروژه",
         time: "25 دقیقه پیش",
         status: "pending",
@@ -27,6 +29,7 @@ export const recentChats = [
     {
         id: 3,
         user: "علی رضایی",
+        avatar: "/avatars/user4.jpg",
         message: "راهنمایی برای محاسبه مصالح مورد نیاز",
         time: "1 ساعت پیش",
         status: "answered",
@@ -35,6 +38,7 @@ export const recentChats = [
     {
         id: 4,
         user: "مریم کریمی",
+        avatar: "/avatars/user3.jpg",
         message: "خطا در سیستم ثبت حضور و غیاب",
         time: "2 ساعت پیش",
         status: "in-progress",

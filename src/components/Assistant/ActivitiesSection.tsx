@@ -1,5 +1,5 @@
-import RecentActivitiesCard from "./RecentActivitiesCard"
-import QuickGuideCard from "./QuickGuideCard"
+import RecentActivitiesCard from "./RecentActivitiesCard/RecentActivitiesCard"
+import QuickGuideCard from "./QuickGuideCard/QuickGuideCard"
 
 const ActivitiesSection = () => {
     return (
