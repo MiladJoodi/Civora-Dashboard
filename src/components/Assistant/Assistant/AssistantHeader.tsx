@@ -1,6 +1,6 @@
+import PageHeader from "@/components/shared/PageHeader/PageHeader";
+import { Badge } from "@/components/ui/badge";
 import { Shield, Cpu, Zap } from "lucide-react";
-import PageHeader from "../shared/PageHeader/PageHeader";
-import { Badge } from "../ui/badge";
 
 const AssistantHeader = () => {
     return (

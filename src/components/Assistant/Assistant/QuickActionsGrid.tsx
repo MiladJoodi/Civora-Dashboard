@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { quickActions } from "./data";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
 import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { quickActions } from "./data";
 
 const QuickActionsGrid = () => {
     return (

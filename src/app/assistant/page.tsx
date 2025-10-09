@@ -1,8 +1,8 @@
-import AssistantHeader from "@/components/Assistant/AssistantHeader"
+import ActivitiesSection from "@/components/Assistant/Assistant/ActivitiesSection"
+import AssistantHeader from "@/components/Assistant/Assistant/AssistantHeader"
+import { assistantStats } from "@/components/Assistant/Assistant/data"
+import QuickActionsGrid from "@/components/Assistant/Assistant/QuickActionsGrid"
 import { StatsGrid } from "@/components/shared/StatsGrid/StatsGrid"
-import { assistantStats } from "@/components/Assistant/data"
-import QuickActionsGrid from "@/components/Assistant/QuickActionsGrid"
-import ActivitiesSection from "@/components/Assistant/ActivitiesSection"
 
 export default function AssistantPage() {
 

@@ -1,11 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <footer className="bg-gradient-to-br from-gray-50 via-white to-gray-50 text-gray-700 mt-8 py-12 relative overflow-hidden">
+        <footer className="relative bg-gradient-to-b from-white via-gray-50 to-amber-50/30 text-gray-700 mt-16 py-16 overflow-hidden">
+            
+            <div className="absolute top-0 left-1/3 w-72 h-72 bg-amber-100 rounded-full blur-3xl opacity-30" />
+            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-100 rounded-full blur-3xl opacity-20" />
+
             <div className="container max-w-6xl mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     {/* بخش درباره ما */}
@@ -115,11 +120,54 @@ const Footer = () => {
                 </div>
 
                 {/* خط جداکننده و کپی رایت */}
-                <div className="border-t border-gray-200 mt-10 pt-6 text-center">
+                <div className="border-t border-gray-200 mt-10 pt-6 text-center space-y-3">
                     <p className="text-gray-500 text-sm">
                         کلیه حقوق این سایت محفوظ است. | طراحی و توسعه با ❤️
                     </p>
+
+                    <div className="flex justify-center items-center gap-3 text-sm text-gray-600">
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <a
+                                    href="https://github.com/MiladJoodi/Civora-Dashboard"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-amber-500 transition-colors"
+                                >
+                                    GitHub
+                                </a>
+                            </TooltipTrigger>
+                            <TooltipContent
+                                side="bottom"
+                                className="bg-orange-50 text-orange-700 border border-orange-200 shadow-md"
+                            >
+                                سورس پروژه
+                            </TooltipContent>
+                        </Tooltip>
+
+                        <span>|</span>
+
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <a
+                                    href="https://linkedin.com/in/joodi/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-amber-500 transition-colors"
+                                >
+                                    LinkedIn
+                                </a>
+                            </TooltipTrigger>
+                            <TooltipContent
+                                side="bottom"
+                                className="bg-orange-50 text-orange-700 border border-orange-200 shadow-md"
+                            >
+                                لینکدین من
+                            </TooltipContent>
+                        </Tooltip>
+                    </div>
                 </div>
+
             </div>
         </footer>
     );
