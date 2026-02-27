@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { useAuth } from "@/store/auth-store"
+import { roleLabels } from "@/components/Login/login-data"
 import {
   Home,
   MessageSquare,
@@ -20,6 +22,7 @@ import {
   PanelRightOpen,
   X,
   Menu,
+  LogOut,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -278,22 +281,7 @@ export function Sidebar() {
           </nav>
 
           {/* User Profile */}
-          {/* بخش کاربر همیشه پایین */}
-          <div className="p-4 border-t border-gray-200">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-orange-200 flex items-center justify-center text-sm font-bold text-orange-700">
-                م
-              </div>
-              {!collapsed && (
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium text-gray-800">
-                    میلاد جودی
-                  </span>
-                  <span className="text-xs text-gray-500">مدیر پروژه</span>
-                </div>
-              )}
-            </div>
-          </div>
+          <UserProfileSection collapsed={collapsed} />
         </div>
 
 
@@ -303,7 +291,38 @@ export function Sidebar() {
 
 
     </>
+  )
+}
 
+function UserProfileSection({ collapsed }: { collapsed: boolean }) {
+  const { user, logout } = useAuth()
 
+  if (!user) return null
+
+  return (
+    <div className="p-3 border-t border-gray-200">
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-8 rounded-full bg-orange-200 flex items-center justify-center text-sm font-bold text-orange-700 shrink-0">
+          {user.avatar}
+        </div>
+        {!collapsed && (
+          <div className="flex flex-1 items-center justify-between min-w-0">
+            <div className="min-w-0">
+              <span className="text-sm font-medium text-gray-800 block truncate">{user.name}</span>
+              <span className="text-xs text-gray-500">{roleLabels[user.role] ?? user.role}</span>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 text-gray-400 hover:text-red-500 shrink-0 cursor-pointer"
+              onClick={logout}
+              title="خروج"
+            >
+              <LogOut className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
+      </div>
+    </div>
   )
 }

@@ -7,6 +7,9 @@ interface StatItem {
   value: React.ReactNode
   icon: LucideIcon
   color?: string
+  change?: number
+  trend?: "up" | "down"
+  trendIcon?: LucideIcon
 }
 
 interface StatsGridProps {
@@ -19,6 +22,10 @@ export const StatsGrid: React.FC<StatsGridProps> = ({ stats, className }) => {
     <div className={`grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6 select-none ${className}`} role="list">
       {stats.map((stat, index) => {
         const Icon = stat.icon
+        const TrendIcon = stat.trendIcon
+        const isUp = stat.trend === "up"
+        const changeAbs = stat.change != null ? Math.abs(stat.change) : null
+
         return (
           <Card
             key={index}
@@ -38,6 +45,25 @@ export const StatsGrid: React.FC<StatsGridProps> = ({ stats, className }) => {
               <div className="text-center text-2xl sm:text-3xl font-extrabold text-gray-900 drop-shadow-md tracking-tight">
                 {toPersianNumber(stat.value)}
               </div>
+              {changeAbs != null && TrendIcon && (
+                <div className="mt-2 flex items-center justify-center gap-1">
+                  <TrendIcon
+                    className={`h-3.5 w-3.5 ${
+                      isUp ? "text-green-500" : "text-red-500"
+                    }`}
+                  />
+                  <span
+                    className={`text-xs font-medium ${
+                      isUp ? "text-green-600" : "text-red-600"
+                    }`}
+                  >
+                    {toPersianNumber(`${changeAbs}٪`)}
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    نسبت به ماه قبل
+                  </span>
+                </div>
+              )}
             </CardContent>
           </Card>
         )

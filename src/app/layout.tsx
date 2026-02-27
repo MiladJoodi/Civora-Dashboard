@@ -2,16 +2,15 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Vazirmatn } from "next/font/google"
 import "./globals.css"
-import { Sidebar } from "@/components/shared/Sidebar/Sidebar"
-import Footer from "@/components/shared/Footer/Footer"
-import { GlobalHeader } from "@/components/shared/GlobalHeader/GlobalHeader"
-
+import { AuthProvider } from "@/store/auth-store"
+import { DashboardShell } from "@/components/shared/DashboardShell"
+import { Toaster } from "sonner"
 
 const vazirmatn = Vazirmatn({
   subsets: ["latin", "arabic"],
   display: "swap",
+  variable: "--font-vazirmatn",
 });
-
 
 export const metadata: Metadata = {
   title: "Civora - سیستم مدیریت پروژه",
@@ -25,22 +24,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${vazirmatn.className} font-sans antialiased`}>
-        <div className="flex h-screen bg-gray-50">
-          {/* Sidebar سمت راست */}
-          <Sidebar />
-
-          {/* بخش اصلی سمت چپ */}
-          <div className="flex flex-col flex-1 overflow-hidden">
-            <GlobalHeader />
-            <main className="bg-white flex-1 overflow-y-auto p-3">
-              <div className="container mx-auto">
-                {children}
-              </div>
-              <Footer />
-            </main>
-          </div>
-        </div>
+      <body className={`${vazirmatn.variable} font-sans antialiased`}>
+        <AuthProvider>
+          <DashboardShell>
+            {children}
+          </DashboardShell>
+          <Toaster position="top-left" dir="rtl" richColors closeButton />
+        </AuthProvider>
       </body>
     </html>
   )
