@@ -1,6 +1,6 @@
 # Civora Dashboard
 
-سیستم مدیریت پروژه‌های ساختمانی — داشبورد مدیریتی جامع برای تیم‌های عمرانی
+A comprehensive construction project management SaaS dashboard with a fully RTL Persian UI, 37 routes, interactive charts, team management CRUD, and skeleton loading states.
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
@@ -9,236 +9,231 @@
 
 ---
 
-## درباره پروژه
+## About
 
-Civora یک داشبورد مدیریتی SaaS برای مدیریت پروژه‌های ساختمانی است که شامل ۳۷ صفحه کامل با رابط کاربری فارسی راست‌چین (RTL) می‌باشد. این پروژه شامل سیستم احراز هویت، مدیریت قراردادها، انبارداری، عملیات، گزارش‌گیری، چت تیمی و تنظیمات کامل کاربران است.
+Civora is a full-featured admin dashboard built for construction teams. It includes fake authentication, contracts management, warehouse inventory, daily operations, technical office documents, reporting with comparison charts, team chat, news, and complete user settings with CRUD. All pages feature Persian (Farsi) text, Jalali dates, Persian numerals, and right-to-left layout.
 
-## امکانات کلیدی
+## Key Features
 
-- **داشبورد اصلی** — نمودارهای تعاملی (درآمد/هزینه، وضعیت پروژه‌ها)، KPI cards، فید فعالیت و جدول تراکنش‌ها
-- **مدیریت قراردادها** — لیست قراردادهای فعال/معلق/تکمیل‌شده با جستجو، مرتب‌سازی و صفحه‌بندی
-- **انبارداری** — مدیریت موجودی، سفارشات و تامین‌کنندگان
-- **عملیات** — عملیات روزانه و تعمیرات و نگهداری
-- **دفتر فنی** — مدیریت پروژه‌ها، مستندات و بازرسی کیفیت
-- **گزارش‌ها** — گزارشات روزانه، هفتگی و ماهانه با نمودارهای مقایسه‌ای
-- **چت تیمی** — کانال‌ها و پیام‌های مستقیم
-- **اخبار** — اخبار شرکت و صنعت
-- **تنظیمات** — پروفایل، تنظیمات سیستم و مدیریت کاربران (CRUD کامل)
-- **دستیار هوشمند** — چت AI و میز کمک (تیکتینگ)
-- **سیستم احراز هویت** — لاگین با انتخاب نقش، محافظت مسیرها با Proxy
+- **Dashboard** — Interactive charts (revenue/expenses, project status pie), KPI cards with trends, activity feed, transaction table
+- **Contracts** — Active, pending, and completed contract lists with search, sorting, pagination, and detail dialogs
+- **Warehouse** — Inventory management, order tracking, supplier directory
+- **Operations** — Daily operations log and maintenance task tracking
+- **Technical Office** — Project management, document library, quality inspections
+- **Reports** — Daily, weekly, and monthly reports with comparison bar/area charts
+- **Team Chat** — Channel-based messaging and direct messages
+- **News** — Company and industry news with card grid layout
+- **Settings** — Profile editing, system preferences, full team member CRUD (create, edit, delete with form validation)
+- **AI Assistant** — AI chat interface and help desk ticketing system
+- **Authentication** — Role-based login, route protection via Next.js Proxy
 
-## پیش‌نمایش صفحات
+## Tech Stack
 
-| صفحه | مسیر | توضیح |
-|------|------|-------|
-| داشبورد | `/` | صفحه اصلی با نمودارها و آمار |
-| ورود | `/login` | فرم ورود با انتخاب نقش |
-| قراردادها | `/contracts` | هاب قراردادها + زیرصفحات |
-| انبار | `/warehouse` | موجودی، سفارشات، تامین‌کنندگان |
-| عملیات | `/operations` | عملیات روزانه و تعمیرات |
-| دفتر فنی | `/technical-office` | پروژه‌ها، مستندات، کیفیت |
-| گزارش‌ها | `/reports` | روزانه، هفتگی، ماهانه |
-| چت تیمی | `/team-chat` | کانال‌ها و پیام مستقیم |
-| اخبار | `/news` | اخبار شرکت و صنعت |
-| تنظیمات | `/settings` | پروفایل، سیستم، مجوزها |
-| دستیار | `/assistant` | چت AI و میز کمک |
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| [Next.js](https://nextjs.org/) | 16 | React framework with App Router |
+| [React](https://react.dev/) | 19 | UI library |
+| [TypeScript](https://www.typescriptlang.org/) | 5 | Type safety |
+| [Tailwind CSS](https://tailwindcss.com/) | 4 | Utility-first styling |
+| [Radix UI](https://www.radix-ui.com/) | — | Headless primitives (Dialog, Select, Switch, Tabs, Tooltip, ...) |
+| [Recharts](https://recharts.org/) | 3 | Interactive charts (Area, Bar, Pie) |
+| [Lucide React](https://lucide.dev/) | — | Icons |
+| [Sonner](https://sonner.emilkowal.ski/) | 2 | Toast notifications |
+| [CVA](https://cva.style/) | — | Component variant management |
 
-## تکنولوژی‌ها
-
-| تکنولوژی | نسخه | کاربرد |
-|-----------|-------|--------|
-| [Next.js](https://nextjs.org/) | 16 | فریم‌ورک React با App Router |
-| [React](https://react.dev/) | 19 | کتابخانه UI |
-| [TypeScript](https://www.typescriptlang.org/) | 5 | تایپ‌سیفتی |
-| [Tailwind CSS](https://tailwindcss.com/) | 4 | استایل‌دهی utility-first |
-| [Radix UI](https://www.radix-ui.com/) | — | کامپوننت‌های headless (Dialog, Select, Switch, Tabs, ...) |
-| [Recharts](https://recharts.org/) | 3 | نمودارهای تعاملی |
-| [Lucide React](https://lucide.dev/) | — | آیکون‌ها |
-| [Sonner](https://sonner.emilkowal.ski/) | 2 | نوتیفیکیشن Toast |
-| [CVA](https://cva.style/) | — | مدیریت variant کامپوننت‌ها |
-
-## ساختار پروژه
+## Project Structure
 
 ```
 src/
-├── app/                        # صفحات (App Router)
-│   ├── layout.tsx              # لایه‌بندی اصلی (فونت، Auth، Toast)
-│   ├── page.tsx                # داشبورد اصلی
-│   ├── login/                  # صفحه ورود
-│   ├── contracts/              # قراردادها (active, pending, completed)
-│   ├── warehouse/              # انبار (inventory, orders, suppliers)
-│   ├── operations/             # عملیات (daily, maintenance)
-│   ├── technical-office/       # دفتر فنی (projects, docs, quality)
-│   ├── reports/                # گزارش‌ها (daily, weekly, monthly)
-│   ├── team-chat/              # چت تیمی (channels, direct)
-│   ├── news/                   # اخبار (company, industry)
-│   ├── settings/               # تنظیمات (profile, system, permissions)
-│   ├── assistant/              # دستیار (ai-chat, help-desk)
-│   └── projects/[id]/          # جزئیات پروژه
+├── app/                        # Pages (App Router)
+│   ├── layout.tsx              # Root layout (font, auth, toast)
+│   ├── page.tsx                # Main dashboard
+│   ├── login/                  # Login page
+│   ├── contracts/              # Contracts (active, pending, completed)
+│   ├── warehouse/              # Warehouse (inventory, orders, suppliers)
+│   ├── operations/             # Operations (daily, maintenance)
+│   ├── technical-office/       # Technical office (projects, docs, quality)
+│   ├── reports/                # Reports (daily, weekly, monthly)
+│   ├── team-chat/              # Team chat (channels, direct)
+│   ├── news/                   # News (company, industry)
+│   ├── settings/               # Settings (profile, system, permissions)
+│   ├── assistant/              # Assistant (ai-chat, help-desk)
+│   └── projects/[id]/          # Project detail
 │
 ├── components/
-│   ├── ui/                     # کامپوننت‌های پایه (Button, Dialog, Table, ...)
-│   ├── shared/                 # کامپوننت‌های مشترک
-│   │   ├── DataTable/          # جدول داده با جستجو، مرتب‌سازی، صفحه‌بندی
-│   │   ├── Sidebar/            # سایدبار ناوبری
-│   │   ├── GlobalHeader/       # هدر بالای صفحه
-│   │   ├── Skeletons/          # اسکلتن بارگذاری صفحات
-│   │   ├── PageHeader/         # هدر صفحات
-│   │   ├── StatsGrid/          # گرید آمار
-│   │   ├── StatusBadge.tsx     # نشان وضعیت
-│   │   ├── ConfirmDialog.tsx   # دیالوگ تایید
-│   │   └── EmptyState.tsx      # حالت خالی
-│   ├── Dashboard/              # کامپوننت‌های داشبورد
-│   ├── Contracts/              # کامپوننت‌های قراردادها
-│   ├── Warehouse/              # کامپوننت‌های انبار
-│   ├── Operations/             # کامپوننت‌های عملیات
-│   ├── TechnicalOffice/        # کامپوننت‌های دفتر فنی
-│   ├── Reports/                # کامپوننت‌های گزارش‌ها
-│   ├── TeamChat/               # کامپوننت‌های چت
-│   ├── News/                   # کامپوننت‌های اخبار
-│   ├── Settings/               # کامپوننت‌های تنظیمات (CRUD کاربران)
-│   └── Login/                  # کامپوننت‌های ورود
+│   ├── ui/                     # Base UI components (Button, Dialog, Table, ...)
+│   ├── shared/                 # Shared components
+│   │   ├── DataTable/          # Generic data table with search, sort, pagination
+│   │   ├── Sidebar/            # Navigation sidebar
+│   │   ├── GlobalHeader/       # Top header bar
+│   │   ├── Skeletons/          # Page loading skeletons (6 variants)
+│   │   ├── PageHeader/         # Standard page header
+│   │   ├── StatsGrid/          # Statistics grid
+│   │   ├── StatusBadge.tsx     # Colored status badge
+│   │   ├── ConfirmDialog.tsx   # Danger action confirmation dialog
+│   │   └── EmptyState.tsx      # Empty state with icon and message
+│   ├── Dashboard/              # Dashboard components (charts, activity feed)
+│   ├── Contracts/              # Contract management components
+│   ├── Warehouse/              # Warehouse components
+│   ├── Operations/             # Operations components
+│   ├── TechnicalOffice/        # Technical office components
+│   ├── Reports/                # Reporting components
+│   ├── TeamChat/               # Chat components
+│   ├── News/                   # News components
+│   ├── Settings/               # Settings & user CRUD components
+│   └── Login/                  # Authentication components
 │
-├── data/mock/                  # داده‌های نمونه
-│   ├── users.ts                # ۱۵۰+ عضو تیم
-│   ├── transactions.ts         # ۲۰۰+ تراکنش مالی
-│   ├── contracts.ts            # ۴۰+ قرارداد
-│   ├── warehouse.ts            # موجودی، سفارشات، تامین‌کنندگان
-│   ├── operations.ts           # عملیات روزانه و تعمیرات
-│   ├── technical.ts            # پروژه‌ها، مستندات، بازرسی
-│   ├── reports.ts              # گزارشات روزانه
-│   ├── revenue.ts              # داده‌های درآمد/هزینه
-│   ├── chat.ts                 # کانال‌ها، مخاطبین، پیام‌ها
-│   ├── news.ts                 # ۲۴ مقاله خبری
-│   ├── activity-log.ts         # لاگ فعالیت‌ها
-│   └── kpi.ts                  # شاخص‌های عملکرد
+├── data/mock/                  # Mock data
+│   ├── users.ts                # 150+ team members
+│   ├── transactions.ts         # 200+ financial records
+│   ├── contracts.ts            # 40+ contracts
+│   ├── warehouse.ts            # Inventory, orders, suppliers
+│   ├── operations.ts           # Daily operations & maintenance
+│   ├── technical.ts            # Projects, documents, inspections
+│   ├── reports.ts              # Daily reports
+│   ├── revenue.ts              # Revenue/expense data (12 months)
+│   ├── chat.ts                 # Channels, contacts, messages
+│   ├── news.ts                 # 24 news articles
+│   ├── activity-log.ts         # Activity log entries
+│   └── kpi.ts                  # KPI metrics
 │
 ├── store/
-│   └── auth-store.tsx          # Context احراز هویت
+│   └── auth-store.tsx          # Auth context provider
 │
 ├── lib/
-│   ├── utils.ts                # cn() و ابزارهای عمومی
-│   ├── ToPersianNumber.ts      # تبدیل اعداد به فارسی
-│   ├── constants.ts            # ثابت‌ها و برچسب‌ها
-│   └── mock-helpers.ts         # توابع کمکی داده نمونه
+│   ├── utils.ts                # cn() and general utilities
+│   ├── ToPersianNumber.ts      # Number to Persian converter
+│   ├── constants.ts            # Status labels, color maps
+│   └── mock-helpers.ts         # Mock data helper functions
 │
-└── proxy.ts                    # Proxy (احراز هویت مسیرها)
+└── proxy.ts                    # Route protection (auth check)
 ```
 
-## نصب و راه‌اندازی
+## Getting Started
 
-### پیش‌نیازها
+### Prerequisites
 
-- [Node.js](https://nodejs.org/) نسخه 18 یا بالاتر
-- [npm](https://www.npmjs.com/) یا [pnpm](https://pnpm.io/) یا [yarn](https://yarnpkg.com/)
+- [Node.js](https://nodejs.org/) 18 or higher
+- [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), or [yarn](https://yarnpkg.com/)
 
-### مراحل نصب
+### Installation
 
 ```bash
-# کلون مخزن
+# Clone the repository
 git clone https://github.com/your-username/civora-dashboard.git
 cd civora-dashboard
 
-# نصب وابستگی‌ها
+# Install dependencies
 npm install
 
-# اجرای حالت توسعه
+# Start development server
 npm run dev
 
-# ساخت نسخه production
+# Build for production
 npm run build
 
-# اجرای نسخه production
+# Start production server
 npm start
 ```
 
-سرور توسعه روی [http://localhost:3000](http://localhost:3000) اجرا می‌شود.
+The dev server runs at [http://localhost:3000](http://localhost:3000).
 
-## نحوه استفاده
+## Usage
 
-### ورود به سیستم
+### Authentication
 
-صفحه ورود (`/login`) شامل ۴ کاربر پیش‌فرض با نقش‌های مختلف است. هر ترکیب ایمیل و رمز عبور پذیرفته می‌شود:
+The login page (`/login`) includes 4 preset demo users with different roles. Any email/password combination is accepted:
 
-| نام | نقش | ایمیل |
-|-----|------|-------|
-| علی محمدی | مدیر پروژه | ali@civora.com |
-| سارا احمدی | مهندس عمران | sara@civora.com |
-| رضا کریمی | سرپرست کارگاه | reza@civora.com |
-| مریم حسینی | حسابدار | maryam@civora.com |
+| Name | Role | Email |
+|------|------|-------|
+| Ali Mohammadi | Project Manager | ali@civora.com |
+| Sara Ahmadi | Civil Engineer | sara@civora.com |
+| Reza Karimi | Site Supervisor | reza@civora.com |
+| Maryam Hosseini | Accountant | maryam@civora.com |
 
-### الگوهای طراحی
+### Design Patterns
 
-- **صفحات Hub**: هر بخش یک صفحه اصلی با آمار و لینک سریع به زیرصفحات دارد
-- **صفحات لیست**: از کامپوننت `DataTable` مشترک با جستجو، مرتب‌سازی و صفحه‌بندی استفاده می‌کنند
-- **CRUD**: مدیریت کاربران در تنظیمات شامل ایجاد، ویرایش و حذف با دیالوگ‌های فرم و اعتبارسنجی
-- **اسکلتن بارگذاری**: تمام صفحات دارای `loading.tsx` با انیمیشن shimmer هستند
+- **Hub pages** — Each section has a landing page with stats overview and quick links to sub-pages
+- **List pages** — Use the shared `DataTable` component with search, column sorting, and pagination
+- **CRUD** — User management in Settings includes create, edit, and delete with form dialogs and validation
+- **Loading skeletons** — All pages have `loading.tsx` files with shimmer animation matching their layout type
 
-### کامپوننت‌های مشترک
+### Shared Components
 
-| کامپوننت | کاربرد |
-|----------|--------|
-| `DataTable<T>` | جدول جنریک با جستجو، مرتب‌سازی ستون‌ها، صفحه‌بندی، عملیات ردیف |
-| `PageHeader` | هدر استاندارد صفحات با عنوان، توضیح و آیکون |
-| `StatsGrid` | نمایش گرید آمار در بالای صفحات Hub |
-| `StatusBadge` | نشان وضعیت رنگی (فعال، معلق، تکمیل، ...) |
-| `ConfirmDialog` | دیالوگ تایید عملیات خطرناک (حذف) |
-| `EmptyState` | حالت خالی با آیکون و پیام |
+| Component | Purpose |
+|-----------|---------|
+| `DataTable<T>` | Generic table with search, column sorting, pagination, row click, header actions |
+| `PageHeader` | Standard page header with title, description, and icon |
+| `StatsGrid` | Statistics cards grid for hub pages |
+| `StatusBadge` | Colored badge mapping status strings to labels |
+| `ConfirmDialog` | Confirmation dialog for destructive actions |
+| `EmptyState` | Empty state placeholder with icon and message |
 
-## قراردادهای فنی
+### Skeleton Variants
 
-- **RTL**: تمام صفحات راست‌چین با `dir="rtl"` و CSS logical properties
-- **اعداد فارسی**: تمام اعداد از `toPersianNumber()` عبور می‌کنند
-- **تاریخ**: تاریخ‌ها به فرمت شمسی (جلالی)
-- **تم رنگی**: نارنجی/کهربایی به عنوان رنگ اصلی
-- **فونت**: Vazirmatn از Google Fonts
-- **داده‌ها**: Mock data در فایل‌ها immutable، در کامپوننت‌ها mutable (useState)
-- **احراز هویت**: React Context + localStorage + Cookie + Proxy
+| Skeleton | Used By |
+|----------|---------|
+| `DashboardSkeleton` | Main dashboard |
+| `HubSkeleton` | Section hub pages (contracts, warehouse, operations, ...) |
+| `TableSkeleton` | List/table pages |
+| `ChatSkeleton` | Chat and messaging pages |
+| `FormSkeleton` | Settings and form pages |
+| `CardGridSkeleton` | News and card-based pages |
 
-## ساختار مسیرها (۳۷ مسیر)
+## Technical Conventions
+
+- **RTL** — Full right-to-left layout with `dir="rtl"` and CSS logical properties (`ps-`, `pe-`, `start-`, `end-`)
+- **Persian numerals** — All numbers pass through `toPersianNumber()` utility
+- **Jalali dates** — Dates displayed in Solar Hijri (Jalali) calendar format
+- **Theme** — Orange/amber accent color throughout
+- **Font** — [Vazirmatn](https://github.com/rastikerdar/vazirmatn) loaded via `next/font/google`
+- **Data** — Mock data is immutable in files, mutable in components via `useState`
+- **Auth** — React Context + localStorage + Cookie + Next.js Proxy
+
+## Routes (37 total)
 
 ```
-/                           داشبورد اصلی
-/login                      ورود به سیستم
-/contracts                  هاب قراردادها
-/contracts/active           قراردادهای فعال
-/contracts/pending          قراردادهای معلق
-/contracts/completed        قراردادهای تکمیل‌شده
-/warehouse                  هاب انبار
-/warehouse/inventory        موجودی انبار
-/warehouse/orders           سفارشات
-/warehouse/suppliers        تامین‌کنندگان
-/operations                 هاب عملیات
-/operations/daily           عملیات روزانه
-/operations/maintenance     تعمیرات و نگهداری
-/technical-office           هاب دفتر فنی
-/technical-office/projects  مدیریت پروژه‌ها
-/technical-office/docs      مستندات فنی
-/technical-office/quality   بازرسی کیفیت
-/reports                    هاب گزارش‌ها
-/reports/daily              گزارشات روزانه
-/reports/weekly             گزارشات هفتگی
-/reports/monthly            گزارشات ماهانه
-/team-chat                  هاب چت تیمی
-/team-chat/channels         کانال‌ها
-/team-chat/direct           پیام مستقیم
-/news                       هاب اخبار
-/news/company               اخبار شرکت
-/news/industry              اخبار صنعت
-/settings                   هاب تنظیمات
-/settings/profile           پروفایل کاربری
-/settings/system            تنظیمات سیستم
-/settings/permissions       مدیریت کاربران و مجوزها
-/assistant                  هاب دستیار
-/assistant/ai-chat          چت هوش مصنوعی
-/assistant/help-desk        میز کمک (تیکتینگ)
-/projects/[id]              جزئیات پروژه
+/                           Main dashboard
+/login                      Login page
+/contracts                  Contracts hub
+/contracts/active           Active contracts
+/contracts/pending          Pending contracts
+/contracts/completed        Completed contracts
+/warehouse                  Warehouse hub
+/warehouse/inventory        Inventory management
+/warehouse/orders           Orders tracking
+/warehouse/suppliers        Supplier directory
+/operations                 Operations hub
+/operations/daily           Daily operations
+/operations/maintenance     Maintenance tasks
+/technical-office           Technical office hub
+/technical-office/projects  Project management
+/technical-office/docs      Technical documents
+/technical-office/quality   Quality inspections
+/reports                    Reports hub
+/reports/daily              Daily reports
+/reports/weekly             Weekly reports with charts
+/reports/monthly            Monthly KPIs and overview
+/team-chat                  Team chat hub
+/team-chat/channels         Channel messaging
+/team-chat/direct           Direct messages
+/news                       News hub
+/news/company               Company news
+/news/industry              Industry news
+/settings                   Settings hub
+/settings/profile           Profile editing
+/settings/system            System preferences
+/settings/permissions       User management & permissions
+/assistant                  Assistant hub
+/assistant/ai-chat          AI chat
+/assistant/help-desk        Help desk ticketing
+/projects/[id]              Project detail
 ```
 
-## لایسنس
+## License
 
 MIT
 
 ---
 
-ساخته شده با Next.js و Tailwind CSS
+Built with [Next.js](https://nextjs.org/) and [Tailwind CSS](https://tailwindcss.com/)
