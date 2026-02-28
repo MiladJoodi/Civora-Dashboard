@@ -39,7 +39,6 @@ Civora is a full-featured admin dashboard built for construction teams. It inclu
 | [Recharts](https://recharts.org/) | 3 | Interactive charts (Area, Bar, Pie) |
 | [Lucide React](https://lucide.dev/) | — | Icons |
 | [Sonner](https://sonner.emilkowal.ski/) | 2 | Toast notifications |
-| [CVA](https://cva.style/) | — | Component variant management |
 
 ## Project Structure
 
